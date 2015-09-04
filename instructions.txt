@@ -1,0 +1,56 @@
+Installation steps followed to setup the Twitter Py instance.
+
+1. Install Solr
+	
+2. Install Pip for Python3
+	
+    http://stackoverflow.com/questions/11268501/how-to-use-pip-with-python-3-x-alongside-python-2-x
+    
+    sudo apt-get install python3-pip
+    Use it like "sudo python3 -m pip install <package name>"
+    Note : Use Python3 instead of Python2.x to circumvent the insecurePlatform SSL error in urllib in python2
+    
+3. Install Tweepy
+    https://github.com/tweepy/tweepy
+    sudo python3 -m pip install tweepy
+    
+4. Change streaming.py file lines 171 and surrounding to decode data to utf-8 string
+
+5. Make a small listener
+    https://www.youtube.com/watch?v=pUUxmvvl2FE
+    
+    
+    
+Helpers
+---------------
+
+1. Finding where Python is installed :
+    http://stackoverflow.com/questions/6767283/find-where-python-is-installed-if-it-isnt-default-dir
+    
+        import sys
+        sys.executable
+    
+2. Finding modules installed in Python
+    http://stackoverflow.com/questions/739993/how-can-i-get-a-list-of-locally-installed-python-modules
+        
+        inside python -> help('modules <name>')
+    
+3. Globals in python
+    restate that a variable is a global inside the method/function
+    
+    eg:
+    count =34 
+    
+    def fun():
+    global count
+    print(count) // gives 35
+    
+4. Clear index in Solr
+    http://anudeep3998.koding.io:8983/solr/TwitterSiphon/update?stream.body=%3Cdelete%3E%3Cquery%3E*:*%3C/query%3E%3C/delete%3E&commit=true
+    
+5. Delete collections in Solr
+    curl "http://localhost:8983/solr/admin/collections?action=DELETE&name=collectionName"
+    
+6. Force terminate solr
+    lsof -i :<port>
+    kill -9 <PID>
