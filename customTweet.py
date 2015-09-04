@@ -60,7 +60,8 @@ class customTweet :
 
     def is_lang_english (self):
         #global lang_set_en
-        return self.lang in self.lang_set_en
+        #return self.lang in self.lang_set_en
+        return false
         
     def is_lang_german (self):
         #global lang_set_de
@@ -77,7 +78,7 @@ class customTweet :
     def is_term_interesting (self):
         for term in self.term_set:
             return term in self.text
-        return false
+        return False
     
     
     def encode_to_json (self):
