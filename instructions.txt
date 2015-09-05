@@ -54,3 +54,6 @@ Helpers
 6. Force terminate solr
     lsof -i :<port>
     kill -9 <PID>
+    
+7. Solr query
+    http://anudeep3998.koding.io:8983/solr/gettingstarted/query?q=%22de%22

@@ -14,8 +14,8 @@ asecret = 'Fo0YlmTqMnLbeH3GsgNn1VyEmCIW3IGWuDKDrQ6cWWXD3'
 
 count = 1
 interesting_count=1
-int_term=0
-int_lang=0
+int_german=0
+int_russian=0
 
 update_url = ['http://localhost:8983/solr/gettingstarted/update/json/docs','http://localhost:7574/solr/gettingstarted/update/json/docs']
 update_url_args = ['?split=/'+ \
@@ -46,14 +46,16 @@ class twitterListener(StreamListener) :
     def on_data(self, data) :
         global count
         global interesting_count
+        global int_german
+        global int_russian
         tweet = customTweet(data)
         
         if tweet.is_lang_interesting() and tweet.is_term_interesting():
-            if tweet.is_term_interesting:
-                int_term = int_term + 1
-            if tweet.is_lang_interesting:
-                int_lang = int_lang + 1
-            print("Got a new tweet :: Total # : "+ str(int_term)+"-"+str(int_lang)+"|"+str(interesting_count)+"/"+str(count))
+            if tweet.is_lang_german():
+                int_german = int_german + 1
+            if tweet.is_lang_russian():
+                int_russian = int_russian + 1
+            print("Got a new tweet :: Total # : "+ str(int_german)+"-"+str(int_russian)+"|"+str(interesting_count-int_german-int_russian)+"/"+str(count))
             interesting_count+=1
             if interesting_count <= 50:
                 req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
@@ -67,7 +69,7 @@ class twitterListener(StreamListener) :
                 req = requests.post(update_url[0]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
                 sys.exit(0)
         else:
-            print("Unkown or uninteresting language/term, skipping")
+            print("Unkown or uninteresting language/term, skipping. Scanned["+str(count)+"]")
         #print("Got a new tweet :: "+parsed_text['text'].encode('ascii', 'ignore').decode('ascii')+"\nTotal # : "+ str(count))
         count = count + 1
         return True

@@ -15,7 +15,7 @@ class customTweet :
     lang_set_de = ['de','de-ch','de-at','de-li','de-lu']
     lang_set_ru = ['ru','ru-mo']
     
-    term_set = ['health']
+    term_set = ['health','Gesundheit','здоровье', 'самочувствие','здравие']
 
     
     def __init__(self, text):
