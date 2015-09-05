@@ -53,7 +53,7 @@ class twitterListener(StreamListener) :
                 int_term = int_term + 1
             if tweet.is_lang_interesting:
                 int_lang = int_lang + 1
-            print("Got a new tweet :: Total # : "+ str(int_term+)+"-"+str(int_lang)+"|"+str(interesting_count)+"/"+str(count))
+            print("Got a new tweet :: Total # : "+ str(int_term)+"-"+str(int_lang)+"|"+str(interesting_count)+"/"+str(count))
             interesting_count+=1
             if interesting_count <= 50:
                 req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
