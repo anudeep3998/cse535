@@ -57,7 +57,7 @@ class twitterListener(StreamListener) :
                 int_russian = int_russian + 1
             print("Got a new tweet :: Total # : "+ str(int_german)+"-"+str(int_russian)+"|"+str(interesting_count-int_german-int_russian)+"/"+str(count))
             interesting_count+=1
-            if interesting_count <= 50:
+            if interesting_count <= 800:
                 req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
                 #print(req.text)
                 #print("Pushing to SOLR : return# "+str(req.status_code))
