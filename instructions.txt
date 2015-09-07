@@ -20,7 +20,11 @@ Installation steps followed to setup the Twitter Py instance.
 5. Make a small listener
     https://www.youtube.com/watch?v=pUUxmvvl2FE
     
+6. Install NLTK ?
+    if yes, attribute as follows :
     
+    NB. If you publish work that uses NLTK, please cite the NLTK book as follows:
+    Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.
     
 Helpers
 ---------------

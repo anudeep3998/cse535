@@ -15,7 +15,9 @@ class customTweet :
     lang_set_de = ['de','de-ch','de-at','de-li','de-lu']
     lang_set_ru = ['ru','ru-mo']
     
-    term_set = ['health','Gesundheit','здоровье', 'самочувствие','здравие','cancer','disease','blood','AIDS']
+    term_set = ['health','Gesundheit','здоровье', 'самочувствие','здравие','cancer','disease', \
+                'blood','AIDS','Krebs','Krebsgeschwür', 'Krankheit', 'Erkrankung', \
+                'болезнь','заболевание','недуг','карцинома']
 
     
     def __init__(self, text):
@@ -60,8 +62,8 @@ class customTweet :
 
     def is_lang_english (self):
         #global lang_set_en
-        return self.lang in self.lang_set_en
-        #return False
+        #return self.lang in self.lang_set_en
+        return False
         
     def is_lang_german (self):
         #global lang_set_de
@@ -78,7 +80,7 @@ class customTweet :
     def is_term_interesting (self):
         for term in self.term_set:
             for word in self.text.split():
-                if word.lower() == term.lower()     #direct comparision works for German, English and Russian. Problems only seem to be with Greek and Turkish
+                if word.lower() == term.lower():     #direct comparision works for German, English and Russian. Problems only seem to be with Greek and Turkish
                     return True
         return False
     
