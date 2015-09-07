@@ -42,6 +42,10 @@ headers = {'Content-type':'application/json'}
 
 
 class twitterListener(StreamListener) :
+    global count
+    global interesting_count
+    global int_german
+    global int_russian
 
     def on_data(self, data) :
         global count
@@ -67,6 +71,7 @@ class twitterListener(StreamListener) :
                 '''
                 req = requests.post(update_url[1]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
                 req = requests.post(update_url[0]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
+                print("Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count))+"]"
                 sys.exit(0)
         else:
             print("Unkown or uninteresting language/term, skipping. Scanned["+str(count)+"]")
@@ -81,5 +86,10 @@ class twitterListener(StreamListener) :
 auth = OAuthHandler(ckey,csecret)
 auth.set_access_token(atoken,asecret)
 
-twitterStream = Stream(auth,twitterListener())
-twitterStream.filter(track=['health'])
+try:
+    twitterStream = Stream(auth,twitterListener())
+    twitterStream.filter(track=['health'])
+except KeyboardInterrupt:
+    print("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count))+"]"
+    raise 
+
