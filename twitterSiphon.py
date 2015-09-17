@@ -90,6 +90,6 @@ try:
     twitterStream = Stream(auth,twitterListener())
     twitterStream.filter(track=['health'])
 except KeyboardInterrupt:
-    print("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count))+"]"
+    print("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
     sys.exit(0) 
 
