@@ -134,9 +134,20 @@ auth.set_access_token(atoken,asecret)
 
 try:
     twitterStream = Stream(auth,twitterListener())
-    logger.start()
+    msg = " initiated run"
+    
+    try:
+        if sys.argv[1] == "cron":
+            msg = "cron" + msg
+        else:
+            msg = "user" + msg
+    except Exception:
+         msg = "user" + msg
+    print(msg)
+    logger.start(msg)
     twitterStream.filter(track=term_set)
 except KeyboardInterrupt:
     print("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
+    logger.end("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
     sys.exit(0) 
 

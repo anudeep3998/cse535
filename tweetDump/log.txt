@@ -109,3 +109,62 @@ Starting twitterSiphon.
 Start Time : 13:03:41.351986
 Successfully completed dump :: Total # : G[0]-R[4] | E[1] / T[501]
 Finish Time : 13:04:32.176905 Executed for : 51s
+
+Starting twitterSiphon. 
+Start Time : 13:07:58.922444
+Successfully completed dump :: Total # : G[1]-R[0] | E[0] / T[501]
+Finish Time : 13:08:55.309908 Executed for : 56s
+
+Starting twitterSiphon. 
+Start Time : 13:10:01.764871
+Successfully completed dump :: Total # : G[0]-R[2] | E[0] / T[501]
+Finish Time : 13:10:55.300880 Executed for : 53s
+
+Starting twitterSiphon. 
+Start Time : 13:19:39.485785
+
+Starting twitterSiphon. 
+Start Time : 13:20:01.495357
+Successfully completed dump :: Total # : G[2]-R[1] | E[0] / T[501]
+Finish Time : 13:20:35.843597 Executed for : 57s
+Successfully completed dump :: Total # : G[2]-R[2] | E[0] / T[501]
+Finish Time : 13:20:53.450414 Executed for : 52s
+
+Starting twitterSiphon. 
+Start Time : 13:21:59.745118
+Successfully completed dump :: Total # : G[5]-R[1] | E[0] / T[501]
+Finish Time : 13:22:59.078583 Executed for : 59s
+
+Starting twitterSiphon. 
+Start Time : 13:26:22.064292
+Successfully completed dump :: Total # : G[1]-R[1] | E[0] / T[501]
+Finish Time : 13:27:12.021944 Executed for : 50s
+
+Starting twitterSiphon. 
+Start Time : 13:27:54.145619
+Successfully completed dump :: Total # : G[0]-R[1] | E[0] / T[501]
+Finish Time : 13:28:32.655123 Executed for : 39s
+
+user initiated run
+Starting twitterSiphon. 
+Start Time : 13:30:01.624931
+Successfully completed dump :: Total # : G[2]-R[6] | E[0] / T[501]
+Finish Time : 13:30:35.538226 Executed for : 34s
+
+cron initiated run
+Starting twitterSiphon. 
+Start Time : 13:33:07.603778
+Successfully completed dump :: Total # : G[2]-R[1] | E[0] / T[501]
+Finish Time : 13:33:53.414792 Executed for : 45s
+
+cron initiated run
+Starting twitterSiphon. 
+Start Time : 13:36:01.723975
+Successfully completed dump :: Total # : G[1]-R[1] | E[0] / T[501]
+Finish Time : 13:36:52.289502 Executed for : 50s
+
+cron initiated run
+Starting twitterSiphon. 
+Start Time : 13:40:01.521957
+Successfully completed dump :: Total # : G[0]-R[2] | E[0] / T[501]
+Finish Time : 13:40:34.673772 Executed for : 33s
