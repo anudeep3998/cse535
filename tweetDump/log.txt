@@ -27,3 +27,85 @@ Finish Time : 06:32:44.284734 Executed for : 39s
 
 Starting twitterSiphon. 
 Start Time : 06:33:02.022602
+Successfully completed dump :: Total # : G[0]-R[0] | E[101] / T[299]
+Finish Time : 06:33:58.624032 Executed for : 57s
+
+Starting twitterSiphon. 
+Start Time : 06:36:02.172145
+Successfully completed dump :: Total # : G[1]-R[3] | E[97] / T[284]
+Finish Time : 06:36:58.434941 Executed for : 56s
+
+Starting twitterSiphon. 
+Start Time : 06:39:01.945090
+Successfully completed dump :: Total # : G[0]-R[0] | E[101] / T[275]
+Finish Time : 06:40:03.461702 Executed for : 61s
+
+Starting twitterSiphon. 
+Start Time : 06:42:02.396191
+Successfully completed dump :: Total # : G[0]-R[2] | E[1] / T[837]
+Finish Time : 06:44:57.999109 Executed for : 176s
+
+Starting twitterSiphon. 
+Start Time : 06:45:01.668012
+Successfully completed dump :: Total # : G[0]-R[8] | E[1] / T[768]
+Finish Time : 06:47:45.024561 Executed for : 163s
+
+Starting twitterSiphon. 
+Start Time : 06:48:01.614586
+Successfully completed dump :: Total # : G[0]-R[2] | E[1] / T[578]
+Finish Time : 06:50:07.408825 Executed for : 125s
+
+Starting twitterSiphon. 
+Start Time : 06:51:01.793612
+Successfully completed dump :: Total # : G[2]-R[5] | E[1] / T[872]
+Finish Time : 06:54:26.762153 Executed for : 205s
+
+Starting twitterSiphon. 
+Start Time : 07:00:02.308172
+Successfully completed dump :: Total # : G[2]-R[3] | E[1] / T[543]
+Finish Time : 07:01:20.213012 Executed for : 78s
+
+Starting twitterSiphon. 
+Start Time : 07:10:01.169844
+Successfully completed dump :: Total # : G[1]-R[2] | E[1] / T[647]
+Finish Time : 07:11:45.569506 Executed for : 105s
+
+Starting twitterSiphon. 
+Start Time : 07:20:02.001302
+Successfully completed dump :: Total # : G[3]-R[4] | E[1] / T[543]
+Finish Time : 07:21:31.480244 Executed for : 89s
+
+Starting twitterSiphon. 
+Start Time : 07:30:02.098848
+Successfully completed dump :: Total # : G[4]-R[2] | E[1] / T[1029]
+Finish Time : 07:33:34.936530 Executed for : 213s
+
+Starting twitterSiphon. 
+Start Time : 07:40:01.216814
+Successfully completed dump :: Total # : G[1]-R[2] | E[1] / T[646]
+Finish Time : 07:42:14.288299 Executed for : 133s
+
+Starting twitterSiphon. 
+Start Time : 12:40:02.298428
+Successfully completed dump :: Total # : G[3]-R[2] | E[1] / T[516]
+Finish Time : 12:40:54.416295 Executed for : 52s
+
+Starting twitterSiphon. 
+Start Time : 12:50:01.575707
+Successfully completed dump :: Total # : G[0]-R[2] | E[1] / T[546]
+Finish Time : 12:51:05.450834 Executed for : 63s
+
+Starting twitterSiphon. 
+Start Time : 12:55:03.331532
+Successfully completed dump :: Total # : G[3]-R[2] | E[1] / T[614]
+Finish Time : 12:56:12.976677 Executed for : 70s
+
+Starting twitterSiphon. 
+Start Time : 13:00:01.632047
+Successfully completed dump :: Total # : G[0]-R[2] | E[1] / T[553]
+Finish Time : 13:00:49.484009 Executed for : 47s
+
+Starting twitterSiphon. 
+Start Time : 13:03:41.351986
+Successfully completed dump :: Total # : G[0]-R[4] | E[1] / T[501]
+Finish Time : 13:04:32.176905 Executed for : 51s

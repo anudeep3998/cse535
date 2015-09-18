@@ -20,7 +20,8 @@ class customTweet :
     
     term_set = ['health','Gesundheit','здоровье', 'самочувствие','здравие','cancer','disease', \
                 'blood','AIDS','Krebs','Krebsgeschwür', 'Krankheit', 'Erkrankung', \
-                'болезнь','заболевание','недуг','карцинома']
+                'болезнь','заболевание','недуг','карцинома','Gesundheitszustand','Volksgesundheit','krank','Übelkeit','	Erkrankung',\
+                'Erbrechen']
 
     
     def __init__(self, text):
@@ -88,8 +89,8 @@ class customTweet :
 
     def is_lang_english (self):
         #global lang_set_en
-        return self.lang in self.lang_set_en
-        #return False
+        #return self.lang in self.lang_set_en
+        return False
         
     def is_lang_german (self):
         #global lang_set_de

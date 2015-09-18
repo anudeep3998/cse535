@@ -89,3 +89,9 @@ Helpers
     
 7. Solr query
     http://anudeep3998.koding.io:8983/solr/gettingstarted/query?q=%22de%22
+    
+8. Grep 
+
+    To count all occurrences, use -o. Try this:
+        cat eng2.txt | grep '"id"' | wc -l
+

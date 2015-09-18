@@ -18,9 +18,12 @@ atoken = '3526839621-Poj6uaa1CNn5WPXK3GFD91NMs0Do1WON3yxkUpE'
 asecret = 'Fo0YlmTqMnLbeH3GsgNn1VyEmCIW3IGWuDKDrQ6cWWXD3'
 
 count = 1
-interesting_count=1
+interesting_count=0
 int_german=0
 int_russian=0
+
+_TOTAL_LIMIT = 500
+_INTERESTING_LIMIT = 100
 
 tw_writer = fileWriter()
 
@@ -48,7 +51,8 @@ update_url_args = ['?split=/'+ \
 headers = {'Content-type':'application/json'}
 term_set = ['health','Gesundheit','здоровье', 'самочувствие','здравие','cancer','disease', \
             'blood','AIDS','Krebs','Krebsgeschwür', 'Krankheit', 'Erkrankung', \
-            'болезнь','заболевание','недуг','карцинома']
+            'болезнь','заболевание','недуг','карцинома','Gesundheitszustand','Volksgesundheit','krank','Übelkeit','	Erkrankung',\
+            'Erbrechen']
 
 
 class twitterListener(StreamListener) :
@@ -68,6 +72,8 @@ class twitterListener(StreamListener) :
         global int_german
         global int_russian
         global tw_writer
+        global _TOTAL_LIMIT
+        global _INTERESTING_LIMIT
         
         tweet = customTweet(data)
         
@@ -77,8 +83,9 @@ class twitterListener(StreamListener) :
                 int_german = int_german + 1
             if tweet.is_lang_russian():
                 int_russian = int_russian + 1
-            print("Got a new tweet :: Total # : "+ str(int_german)+"-"+str(int_russian)+"|"+str(interesting_count-int_german-int_russian)+"/"+str(count))
+                
             interesting_count+=1
+            print("Got a new tweet :: Total # : "+ str(int_german)+"-"+str(int_russian)+"|"+str(interesting_count-int_german-int_russian)+"/"+str(count))
             
             if tweet.is_lang_german() :
                 tw_writer.dump_tweet(data,'de')
@@ -88,7 +95,7 @@ class twitterListener(StreamListener) :
                 tw_writer.dump_tweet(data,'en')
             
             
-            if interesting_count <= 100 and count <=500 :
+            if interesting_count <= _INTERESTING_LIMIT and count <= _TOTAL_LIMIT :
                 req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
                 #print(req.text)
                 #print("Pushing to SOLR : return# "+str(req.status_code))
@@ -108,6 +115,14 @@ class twitterListener(StreamListener) :
             print("Unkown or uninteresting language/term, skipping. Scanned["+str(count)+"]")
         #print("Got a new tweet :: "+parsed_text['text'].encode('ascii', 'ignore').decode('ascii')+"\nTotal # : "+ str(count))
         count = count + 1
+        
+        #terminate after limit
+        if count > _TOTAL_LIMIT :
+            msg = "Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
+            logger.end(msg)
+            print(msg)
+            sys.exit(0)
+        
         return True
         
     def on_error(self, status) :
