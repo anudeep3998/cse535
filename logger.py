@@ -29,21 +29,21 @@ def end(msg):
     end_nano = int(round(time.time()))
     elipsed_nano = end_nano - start_nano
     
-    p = subprocess.Popen(str("cat ger2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
+    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/ger2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
-    ger_count = int(output)
+    ger_count = str(int(output)) #remove byte encoding
 
-    p = subprocess.Popen(str("cat rus2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
+    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/rus2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
-    rus_count = int(output)
+    rus_count = str(int(output))
     
-    p = subprocess.Popen(str("cat eng2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
+    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/eng2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
-    eng_count = int(output)
+    eng_count = str(int(output))
     
     with open(file_path,"a+") as f:
         f.seek(0,2) #seek file end
         f.write("\n"+msg+"\nFinish Time : "+str(end_time) + " Executed for : "+str(elipsed_nano)+"s")
-        f.write("\n Current tweets in dump : G["+ger_count+"]-R["+rus_count+"]-E["+eng_count+"]")
+        f.write("\nCurrent tweets in dump : G["+ger_count+"]-R["+rus_count+"]-E["+eng_count+"]")
     
     

@@ -168,3 +168,44 @@ Starting twitterSiphon.
 Start Time : 13:40:01.521957
 Successfully completed dump :: Total # : G[0]-R[2] | E[0] / T[501]
 Finish Time : 13:40:34.673772 Executed for : 33s
+
+user initiated run
+Starting twitterSiphon. 
+Start Time : 13:45:55.540881
+Successfully completed dump :: Total # : G[0]-R[0] | E[0] / T[501]
+Finish Time : 13:46:39.975996 Executed for : 44s
+
+user initiated run
+Starting twitterSiphon. 
+Start Time : 13:47:51.641233
+
+cron initiated run
+Starting twitterSiphon. 
+Start Time : 13:48:02.040806
+Successfully completed dump :: Total # : G[0]-R[1] | E[0] / T[501]
+Finish Time : 13:48:34.512469 Executed for : 43s
+ Current tweets in dump : G[0]-R[0]-E[0]
+Successfully completed dump :: Total # : G[0]-R[1] | E[0] / T[501]
+Finish Time : 13:48:48.749279 Executed for : 47s
+ Current tweets in dump : G[0]-R[0]-E[0]
+
+user initiated run
+Starting twitterSiphon. 
+Start Time : 13:49:13.485791
+Successfully completed dump :: Total # : G[2]-R[1] | E[0] / T[501]
+Finish Time : 13:50:02.095751 Executed for : 49s
+ Current tweets in dump : G[56]-R[122]-E[2169]
+
+cron initiated run
+Starting twitterSiphon. 
+Start Time : 13:52:01.974219
+Successfully completed dump :: Total # : G[1]-R[0] | E[0] / T[501]
+Finish Time : 13:52:46.975644 Executed for : 45s
+ Current tweets in dump : G[0]-R[0]-E[0]
+
+user initiated run
+Starting twitterSiphon. 
+Start Time : 13:53:14.874507
+[user] Successfully completed dump :: Total # : G[0]-R[2] | E[0] / T[501]
+Finish Time : 13:54:01.292888 Executed for : 46s
+ Current tweets in dump : G[57]-R[124]-E[2169]

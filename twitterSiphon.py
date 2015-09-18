@@ -21,6 +21,7 @@ count = 1
 interesting_count=0
 int_german=0
 int_russian=0
+init_by = 'user'
 
 _TOTAL_LIMIT = 500
 _INTERESTING_LIMIT = 100
@@ -61,6 +62,7 @@ class twitterListener(StreamListener) :
     global int_german
     global int_russian
     global tw_writer
+    global init_by
     
     def __init__(self):
         super().__init__()
@@ -74,6 +76,7 @@ class twitterListener(StreamListener) :
         global tw_writer
         global _TOTAL_LIMIT
         global _INTERESTING_LIMIT
+        global init_by
         
         tweet = customTweet(data)
         
@@ -105,7 +108,7 @@ class twitterListener(StreamListener) :
                 '''
                 req = requests.post(update_url[1]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
                 req = requests.post(update_url[0]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
-                msg = "Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
+                msg = "["+init_by+"] Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
                 print(msg)
                 logger.end(msg)
                 sys.exit(0)
@@ -118,7 +121,7 @@ class twitterListener(StreamListener) :
         
         #terminate after limit
         if count > _TOTAL_LIMIT :
-            msg = "Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
+            msg = "["+init_by+"] Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
             logger.end(msg)
             print(msg)
             sys.exit(0)
@@ -139,15 +142,18 @@ try:
     try:
         if sys.argv[1] == "cron":
             msg = "cron" + msg
+            init_by = 'cron'
         else:
             msg = "user" + msg
+            init_by = 'user'
     except Exception:
          msg = "user" + msg
+         init_by = 'user'
     print(msg)
     logger.start(msg)
     twitterStream.filter(track=term_set)
 except KeyboardInterrupt:
-    print("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
-    logger.end("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
+    print("["+init_by+"] Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
+    logger.end("["+init_by+"] Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
     sys.exit(0) 
 
