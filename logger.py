@@ -26,6 +26,6 @@ def end(msg):
     elipsed_nano = end_nano - start_nano
     with open(file_path,"a+") as f:
         f.seek(0,2) #seek file end
-        f.write("\n"+msg+"\nFinish Time : "+str(end_time) + " Executed for : "+str(elipsed_nano))
+        f.write("\n"+msg+"\nFinish Time : "+str(end_time) + " Executed for : "+str(elipsed_nano)+"s")
 
 
