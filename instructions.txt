@@ -41,7 +41,18 @@ Installation steps followed to setup the Twitter Py instance.
         Publications should cite this website when referring to the online version of WordNet. Below is a citation in MLA web citation style.
         
         Princeton University "About WordNet." WordNet. Princeton University. 2010. <http://wordnet.princeton.edu>
-    
+        
+ 7. Add loggers
+ 
+ 8. Cron job
+        list all jobs
+            sudo crontab -l
+        
+        edit list 
+            sudo crontab -e
+            
+        view sys logs
+            vim /var/log/syslog
 Helpers
 ---------------
 
