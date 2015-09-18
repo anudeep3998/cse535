@@ -1,24 +1,46 @@
 import os
 
+_const_EN = 0
+_const_DE = 1
+_const_RU = 2
+file_path = ['tweetDump/eng.txt', 'tweetDump/ger.txt', 'tweetDump/rus.txt']
+file_size = [0,0,0]
+writes = [0,0,0]
+_size_linesep = len(os.linesep)
+
 class fileWriter :
+	
+    def write_header(self, path) : 
+        with open(path,"a+") as f :
+            f.write('{\n    "tweets" : [')
 
-    _const_EN = 0
-    _const_DE = 1
-    _const_RU = 2
+
+    '''def write_tail(path) :
+        with open(path,"a+") as f :
+            f.write(',\n')'''
+
+    def write_eof(self, path) :
+        with open(path,"a+") as f :
+            f.seek(0,2) # 0 byte from eof
+            f.write(']}')
+
+    def write_tweet(self, path,tweet):
+        global _size_linesep
+        with open(path,"a+") as f :
+            f.seek(0,2) # goto start of file
+            f.seek(f.tell() - (_size_linesep+1),0)
+            '''print(f.read(2))
+            print(f.read(1))
+            print(f.read(1))'''
+            if f.read(1) == ']' :
+                f.seek(f.tell()-2,0)
+                f.truncate()
+                f.write(',\n')
+                
+            f.write(tweet)
+            f.write(']}')
     
-	file_path[_const_EN] = 'tweetDump/eng.txt'
-	file_path[_const_DE] = 'tweetDump/ger.txt'
-	file_path[_const_RU] = 'tweetDump/rus.txt'
-
-	file_size[_const_EN] = 0
-	file_size[_const_DE] = 0
-	file_size[_const_RU] = 0
-	
-	writes[_const_RU] = 0
-	writes[_const_DE] = 0
-	writes[_const_EN] = 0
-	
-	def dump_tweet(tweet='{}',path='en') :
+    def dump_tweet(self, tweet='{}',path='en') :
 	    
 	    global _const_RU
 	    global _const_DE
@@ -44,36 +66,16 @@ class fileWriter :
 	    
 	    #check file size to determine whether header text needs to be added and cache
 	    
-	   file_size[current_file] = os.stat(file_path[current_file]).st_size
+	    try:
+	        file_size[current_file] = os.stat(file_path[current_file]).st_size
+	    except FileNotFoundError:
+	        file_size[current_file] = 0
+	    finally:
+	        if file_size[current_file] <=0 :
+	            self.write_header(file_path[current_file])
 	    
-	    if file_size[current_file] <=0 :
-	        write_header(file_path[current_file])
+	    
+	    
 	        
-	    write_tweet(file_path[current_file],tweet)
+	    self.write_tweet(file_path[current_file],tweet)
 	    writes[current_file]+=1
-	            
-	   
-    def write_header(path) : 
-        with open(path,"a+") as f :
-            f.write('{\n    "tweets" : [\n')
-    
- '''def write_tail(path) :
-        with open(path,"a+") as f :
-            f.write(',\n')'''
-            
-    def write_eof(path) :
-        with open(path,"a+") as f :
-            f.seek(0,2) # 0 byte from eof
-            f.write(']}')
-
-    def write_tweet(path,tweet):
-        with open(path,"a+") as f :
-            f.seek(1,2) # 1 byte from eof
-            if f.read(1) == '}' :
-                f.seek(2,2)
-                f.write(',\n')
-                
-            f.write(tweet)
-            f.write(']}')
-    
-                

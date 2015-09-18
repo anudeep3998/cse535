@@ -6,6 +6,7 @@ import json
 import requests
 import sys
 from customTweet import customTweet
+from fileWriter import fileWriter
 
 ckey = 'ZiS77nnXgwbPIVZ5AsvxERCnK'
 csecret = 'VKcf7Sfd5mwmpcjSuGOWVCkiLMfpoMOZ5i4LLidCZtwhMUBv8Q'
@@ -16,6 +17,8 @@ count = 1
 interesting_count=1
 int_german=0
 int_russian=0
+
+tw_writer = fileWriter()
 
 update_url = ['http://localhost:8983/solr/gettingstarted/update/json/docs','http://localhost:7574/solr/gettingstarted/update/json/docs']
 update_url_args = ['?split=/'+ \
@@ -46,13 +49,28 @@ class twitterListener(StreamListener) :
     global interesting_count
     global int_german
     global int_russian
+    global tw_writer
+    
+    def __init__(self):
+        super().__init__()
+        #tw_writer = fileWriter()
 
     def on_data(self, data) :
         global count
         global interesting_count
         global int_german
         global int_russian
+        global tw_writer
+        
         tweet = customTweet(data)
+        
+        if tweet.is_lang_german() :
+            tw_writer.dump_tweet(data,'de')
+        elif tweet.is_lang_russian() :
+            tw_writer.dump_tweet(data,'ru')
+        elif tweet.is_lang_english() :
+            tw_writer.dump_tweet(data,'en')
+        
         
         if tweet.is_lang_interesting() and tweet.is_term_interesting():
             if tweet.is_lang_german():
@@ -61,7 +79,7 @@ class twitterListener(StreamListener) :
                 int_russian = int_russian + 1
             print("Got a new tweet :: Total # : "+ str(int_german)+"-"+str(int_russian)+"|"+str(interesting_count-int_german-int_russian)+"/"+str(count))
             interesting_count+=1
-            if interesting_count <= 800:
+            if interesting_count <= 200:
                 req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
                 #print(req.text)
                 #print("Pushing to SOLR : return# "+str(req.status_code))
@@ -71,7 +89,7 @@ class twitterListener(StreamListener) :
                 '''
                 req = requests.post(update_url[1]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
                 req = requests.post(update_url[0]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
-                print("Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count))+"]"
+                print("Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]")
                 sys.exit(0)
         else:
             print("Unkown or uninteresting language/term, skipping. Scanned["+str(count)+"]")

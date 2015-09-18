@@ -62,8 +62,8 @@ class customTweet :
 
     def is_lang_english (self):
         #global lang_set_en
-        #return self.lang in self.lang_set_en
-        return False
+        return self.lang in self.lang_set_en
+        #return False
         
     def is_lang_german (self):
         #global lang_set_de
