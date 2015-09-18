@@ -1,0 +1,16 @@
+
+
+Starting twitterSiphon. 
+Start Time : 05:41:41.431430
+Successfully completed dump :: Total # : G[0]-R[2] | E[99] / T[280]
+Finish Time : 05:42:51.168961 Executed for : 1442554971
+
+Starting twitterSiphon. 
+Start Time : 05:45:03.509566
+Successfully completed dump :: Total # : G[0]-R[1] | E[100] / T[257]
+Finish Time : 05:45:57.616855 Executed for : 1442555158
+
+Starting twitterSiphon. 
+Start Time : 05:46:39.250907
+Successfully completed dump :: Total # : G[1]-R[0] | E[100] / T[328]
+Finish Time : 05:47:44.667289 Executed for : 66

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from tweepy import OAuthHandler
 from tweepy import Stream
 from tweepy.streaming import StreamListener
@@ -5,6 +7,7 @@ from tweepy.streaming import StreamListener
 import json
 import requests
 import sys
+import logger
 from customTweet import customTweet
 from fileWriter import fileWriter
 
@@ -42,6 +45,9 @@ update_url_args = ['?split=/'+ \
                   ]
 
 headers = {'Content-type':'application/json'}
+term_set = ['health','Gesundheit','здоровье', 'самочувствие','здравие','cancer','disease', \
+            'blood','AIDS','Krebs','Krebsgeschwür', 'Krankheit', 'Erkrankung', \
+            'болезнь','заболевание','недуг','карцинома']
 
 
 class twitterListener(StreamListener) :
@@ -64,22 +70,24 @@ class twitterListener(StreamListener) :
         
         tweet = customTweet(data)
         
-        if tweet.is_lang_german() :
-            tw_writer.dump_tweet(data,'de')
-        elif tweet.is_lang_russian() :
-            tw_writer.dump_tweet(data,'ru')
-        elif tweet.is_lang_english() :
-            tw_writer.dump_tweet(data,'en')
         
-        
-        if tweet.is_lang_interesting() and tweet.is_term_interesting():
+        if tweet.is_lang_interesting() and tweet.is_term_interesting() and tweet.is_original():
             if tweet.is_lang_german():
                 int_german = int_german + 1
             if tweet.is_lang_russian():
                 int_russian = int_russian + 1
             print("Got a new tweet :: Total # : "+ str(int_german)+"-"+str(int_russian)+"|"+str(interesting_count-int_german-int_russian)+"/"+str(count))
             interesting_count+=1
-            if interesting_count <= 200:
+            
+            if tweet.is_lang_german() :
+                tw_writer.dump_tweet(data,'de')
+            elif tweet.is_lang_russian() :
+                tw_writer.dump_tweet(data,'ru')
+            elif tweet.is_lang_english() :
+                tw_writer.dump_tweet(data,'en')
+            
+            
+            if interesting_count <= 100 and count <=500 :
                 req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
                 #print(req.text)
                 #print("Pushing to SOLR : return# "+str(req.status_code))
@@ -89,8 +97,12 @@ class twitterListener(StreamListener) :
                 '''
                 req = requests.post(update_url[1]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
                 req = requests.post(update_url[0]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
-                print("Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]")
+                msg = "Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
+                print(msg)
+                logger.end(msg)
                 sys.exit(0)
+        elif not tweet.is_original():
+            print("retweet/quoted tweet. Scanned["+str(count)+"]")
         else:
             print("Unkown or uninteresting language/term, skipping. Scanned["+str(count)+"]")
         #print("Got a new tweet :: "+parsed_text['text'].encode('ascii', 'ignore').decode('ascii')+"\nTotal # : "+ str(count))
@@ -106,7 +118,8 @@ auth.set_access_token(atoken,asecret)
 
 try:
     twitterStream = Stream(auth,twitterListener())
-    twitterStream.filter(track=['health'])
+    logger.start()
+    twitterStream.filter(track=term_set)
 except KeyboardInterrupt:
     print("Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
     sys.exit(0) 

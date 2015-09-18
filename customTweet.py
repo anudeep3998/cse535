@@ -10,6 +10,9 @@ class customTweet :
     created_at = ''         #UTC time when the tweet was posted
     coordinates = [-1,-1]   #[longitude,latitude]
     text = ''               #text of tweeet
+    retweet_status = False
+    quote_status = False
+    user_lang = 'en'
     
     lang_set_en = ['en','en-us','en-gb','en-au','en-ca','en-nz','en-ie','en-za','en-jm','en-bz','en-tt','en-in']
     lang_set_de = ['de','de-ch','de-at','de-li','de-lu']
@@ -34,6 +37,11 @@ class customTweet :
             pass
         
         try:
+            self.user_lang = json_text['user']['lang']
+        except KeyError:
+            pass
+        
+        try:
             self.created_at = json_text['created_at']
         except KeyError:
             pass
@@ -51,14 +59,32 @@ class customTweet :
             self.text = json_text['text']
         except KeyError:
             pass
+        
+        try:
+            if not json_text['retweeted_status']:
+                self.retweet_status = False
+            else :
+                self.retweet_status = True
+        except KeyError:
+            pass
 
+        try:
+            if not json_text['quoted_status']:
+                self.quote_status = False
+            else :
+                self.quote_status = True
+        except KeyError:
+            pass
 
-    def set_vals(self, _id='0',lang='en',created_at='',coordinates=[-1,-1],text=''):
+    def set_vals(self, _id='0',lang='en',created_at='',coordinates=[-1,-1],text='',retweet_status=False,quote_status=False, user_lang='en'):
         self._id = _id
         self.lang = lang
         self.created_at = created_at
         self.coordinates = coordinates
         self.text = text
+        self.retweet_status = retweet_status
+        self.quote_status = quote_status
+        self.user_lang = user_lang
 
     def is_lang_english (self):
         #global lang_set_en
@@ -67,11 +93,11 @@ class customTweet :
         
     def is_lang_german (self):
         #global lang_set_de
-        return self.lang in self.lang_set_de
+        return ((self.lang in self.lang_set_de) and (self.user_lang in self.lang_set_de))
   
     def is_lang_russian (self):
         #global lang_set_ru
-        return self.lang in self.lang_set_ru
+        return ((self.lang in self.lang_set_ru) and (self.user_lang in self.lang_set_ru))
     
     def is_lang_interesting (self):
         return self.is_lang_english() or self.is_lang_german() or self.is_lang_russian()
@@ -95,3 +121,6 @@ class customTweet :
         
         #print(json.loads(str_tweet))
         return str_tweet
+
+    def is_original(self) :
+        return ((not self.retweet_status) and (not self.quote_status))

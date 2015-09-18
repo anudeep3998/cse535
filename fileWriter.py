@@ -3,7 +3,7 @@ import os
 _const_EN = 0
 _const_DE = 1
 _const_RU = 2
-file_path = ['tweetDump/eng.txt', 'tweetDump/ger.txt', 'tweetDump/rus.txt']
+file_path = ['tweetDump/eng2.txt', 'tweetDump/ger2.txt', 'tweetDump/rus2.txt']
 file_size = [0,0,0]
 writes = [0,0,0]
 _size_linesep = len(os.linesep)
