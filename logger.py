@@ -1,7 +1,8 @@
 from datetime import datetime
 import time
 
-file_path = 'tweetDump/log.txt'
+_static_path = "/home/anudeep3998/cse535/code/"
+file_path = _static_path+'tweetDump/log.txt'
 start_time = ''
 start_nano = 0
 end_time = ''

@@ -19,3 +19,11 @@ Starting twitterSiphon.
 Start Time : 05:50:16.060257
 Successfully completed dump :: Total # : G[0]-R[1] | E[100] / T[302]
 Finish Time : 05:51:15.992911 Executed for : 60s
+
+Starting twitterSiphon. 
+Start Time : 06:32:05.239363
+Successfully completed dump :: Total # : G[0]-R[1] | E[100] / T[228]
+Finish Time : 06:32:44.284734 Executed for : 39s
+
+Starting twitterSiphon. 
+Start Time : 06:33:02.022602

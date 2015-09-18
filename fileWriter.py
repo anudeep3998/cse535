@@ -1,9 +1,10 @@
 import os
 
+_static_path = "/home/anudeep3998/cse535/code/"
 _const_EN = 0
 _const_DE = 1
 _const_RU = 2
-file_path = ['tweetDump/eng2.txt', 'tweetDump/ger2.txt', 'tweetDump/rus2.txt']
+file_path = [_static_path+'tweetDump/eng2.txt', _static_path+'tweetDump/ger2.txt', _static_path+'tweetDump/rus2.txt']
 file_size = [0,0,0]
 writes = [0,0,0]
 _size_linesep = len(os.linesep)
