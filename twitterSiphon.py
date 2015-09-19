@@ -9,6 +9,8 @@ import json
 import requests
 import sys
 import logger
+import subprocess
+
 from customTweet import customTweet
 from fileWriter import fileWriter
 
@@ -25,6 +27,7 @@ init_by = 'user'
 
 _TOTAL_LIMIT = 500
 _INTERESTING_LIMIT = 100
+_STRICT_INTERESTING_LIMIT_LOWER = 5
 
 tw_writer = fileWriter()
 
@@ -76,6 +79,7 @@ class twitterListener(StreamListener) :
         global tw_writer
         global _TOTAL_LIMIT
         global _INTERESTING_LIMIT
+        global _STRICT_INTERESTING_LIMIT_LOWER
         global init_by
         
         tweet = customTweet(data)
@@ -98,8 +102,19 @@ class twitterListener(StreamListener) :
                 tw_writer.dump_tweet(data,'en')
             
             
-            if interesting_count <= _INTERESTING_LIMIT and count <= _TOTAL_LIMIT :
-                req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
+            if (interesting_count <= _INTERESTING_LIMIT and count <= _TOTAL_LIMIT) or interesting_count <= _STRICT_INTERESTING_LIMIT_LOWER :
+                try:
+                    req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
+                except Exception:
+                        logger.log("Solr offline. Attempting wake")
+                        p = subprocess.Popen(str("/home/anudeep3998/cse535/solr/solr-5.3.0/bin/solr start -e cloud -noprompt"), stdout=subprocess.PIPE, shell=True)
+                        (output, err) = p.communicate()
+                        if err :
+                            logger.log("Couldn't wake solr. Terminating.")
+                            sys.exit(0)
+                        else :
+                            logger.log("solr wake successful. Continuing..")
+                
                 #print(req.text)
                 #print("Pushing to SOLR : return# "+str(req.status_code))
             else:
@@ -120,7 +135,7 @@ class twitterListener(StreamListener) :
         count = count + 1
         
         #terminate after limit
-        if count > _TOTAL_LIMIT :
+        if count > _TOTAL_LIMIT and interesting_count > _STRICT_INTERESTING_LIMIT_LOWER :
             msg = "["+init_by+"] Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
             logger.end(msg)
             print(msg)

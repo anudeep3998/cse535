@@ -10,6 +10,13 @@ end_time = ''
 end_nano = 0
 elipsed_nano = 0
 
+def log(msg):
+    with open(file_path,"a+") as f:
+        f.seek(0,2) #seek file end
+        if msg:
+            f.write("\n"+msg)
+    
+
 def start(cus_msg):
     global start_nano
     start_time = datetime.now().time()
