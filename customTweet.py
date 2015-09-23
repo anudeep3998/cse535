@@ -44,35 +44,46 @@ class customTweet :
         try:
             json_text = json.loads(text)
             self._id = json_text['id_str']
+            print("id : "+self._id)
         except KeyError:
             pass
         
         try:
             self.lang = json_text['lang']
+            print("lang : "+self.lang)
         except KeyError:
             pass
         
         try:
             self.user_lang = json_text['user']['lang']
+            print("u_lang : "+self.user_lang)
         except KeyError:
             pass
         
         try:
             self.created_at = json_text['created_at']
+            print("created_at : "+self.created_at)
         except KeyError:
             pass
         
-        try:
-            self.coordinates = json_text['coordinates']['coordinates']
-            if not self.coordinates:
+        '''try:
+            print("coordinates : "+self.coordinates)
+            if (json_text['coordinates']) and ((json_text['coordinates']['coordinates'])) :
+                print("coordinates : "+self.coordinates)
+                self.coordinates = json_text['coordinates']['coordinates']
+            else:
                 self.coordinates = [-1,-1]
+            print("coordinates : "+self.coordinates)
         except KeyError:
             self.coordinates = [-1,-1]
+            print("KeyError coordinates : "+self.coordinates)
         except TypeError:
             self.coordinates = [-1,-1]
+            print("TypeError coordinates : "+self.coordinates)'''
         
         try:
             self.text = json_text['text']
+            print("text : "+self.text)
         except KeyError:
             pass
         
@@ -81,17 +92,20 @@ class customTweet :
                 self.retweet_status = False
             else :
                 self.retweet_status = True
+            print("retweet_status : "+self.retweet_status)
         except KeyError:
             pass
-
+        
         try:
             if not json_text['quoted_status']:
                 self.quote_status = False
             else :
                 self.quote_status = True
+            print("quote_status : "+self.quote_status)
         except KeyError:
             pass
         
+        '''
         try:
             if not json_text['place']:
                 self.place_id = ''
@@ -166,7 +180,9 @@ class customTweet :
             self.timestamp = json_text['timestamp_ms']
         except KeyError:
             self.timestamp = 0
-        
+        '''
+
+
     #currently not in use. Add other variables to complete and use
     def set_vals(self, _id='0',lang='en',created_at='',coordinates=[-1,-1],text='',retweet_status=False,quote_status=False, user_lang='en'):
         self._id = _id
