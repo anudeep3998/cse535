@@ -18,7 +18,7 @@ class fileWriter :
 
     def __init__(self, paths = [], header = '', tail = ''):
         if paths and len(paths) >= 3:
-            self.file_path = path
+            self.file_path = paths
         if header:
             self.custom_header = header
         if tail:
@@ -41,13 +41,13 @@ class fileWriter :
     def write_tweet(self, path,tweet):
         global _size_linesep
         with open(path,"a+") as f :
-            f.seek(0,2) # goto start of file
-            f.seek(f.tell() - (_size_linesep+len(custom_tail)-1),0)
+            f.seek(0,2) # goto end of file
+            f.seek(f.tell() - (len(custom_tail)),0)
             '''print(f.read(2))
             print(f.read(1))
             print(f.read(1))'''
             if f.read(1) == ']' :
-                f.seek(f.tell()-2,0)
+                f.seek(f.tell()-len(custom_tail),0)
                 f.truncate()
                 f.write(',\n')
                 
