@@ -14,9 +14,9 @@ json_writer = fileWriter(to_file_path,custom_header,custom_tail)
 for fr in from_file_path:
     with open (fr,"r+") as f:
         for line in  f:
-            if len(line) > 2 :
+            if len(line) > 10 :
                 try:
-                    print("trying to dump :: "+line)
+                    print("trying to dump :: "+line[:10])
                     tweet = customTweet(line)
                     json_writer.dump_tweet(tweet.encode_to_json, tweet.lang)
                     if tweet.is_lang_english():
@@ -27,7 +27,7 @@ for fr in from_file_path:
                         count[2] = count[2]+1
 
                 except Exception:
-                    print("failed to dump :: "+line)
+                    print("failed to dump :: "+line[:10])
                     illegal+=1
                     #print("Found an illegal entry")
 
@@ -35,4 +35,4 @@ t=0
 for f in from_file_path:
     print('Dumped :: '+f+' --> '+to_file_path[(t)])
     t=t+1
-print('Write :: '+' E['+count[0]+']'+' G['+count[1]+']'+' R['+count[2]+']'+' I['+illegal+']') 
+print('Write :: '+' E['+str(count[0])+']'+' G['+str(count[1])+']'+' R['+str(count[2])+']'+' I['+str(illegal)+']') 
