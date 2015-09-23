@@ -4,16 +4,29 @@ _static_path = "/home/anudeep3998/cse535/code/"
 _const_EN = 0
 _const_DE = 1
 _const_RU = 2
-file_path = [_static_path+'tweetDump/eng2.txt', _static_path+'tweetDump/ger2.txt', _static_path+'tweetDump/rus2.txt']
 file_size = [0,0,0]
 writes = [0,0,0]
+
 _size_linesep = len(os.linesep)
 
 class fileWriter :
+    
+    global _static_path
+    file_path = [_static_path+'tweetDump/eng2.txt', _static_path+'tweetDump/ger2.txt', _static_path+'tweetDump/rus2.txt']
+    custom_header = '{\n    "tweets" : ['
+    custom_tail = ']}'
+
+    def __init__(self, paths = [], header = '', tail = ''):
+        if paths and len(paths) >= 3:
+            self.file_path = path
+        if header:
+            self.custom_header = header
+        if tail:
+            self.custom_tail = tail
 	
     def write_header(self, path) : 
         with open(path,"a+") as f :
-            f.write('{\n    "tweets" : [')
+            f.write(custom_header)
 
 
     '''def write_tail(path) :
@@ -23,13 +36,13 @@ class fileWriter :
     def write_eof(self, path) :
         with open(path,"a+") as f :
             f.seek(0,2) # 0 byte from eof
-            f.write(']}')
+            f.write(custom_tail)
 
     def write_tweet(self, path,tweet):
         global _size_linesep
         with open(path,"a+") as f :
             f.seek(0,2) # goto start of file
-            f.seek(f.tell() - (_size_linesep+1),0)
+            f.seek(f.tell() - (_size_linesep+len(custom_tail)-1),0)
             '''print(f.read(2))
             print(f.read(1))
             print(f.read(1))'''
@@ -39,7 +52,7 @@ class fileWriter :
                 f.write(',\n')
                 
             f.write(tweet)
-            f.write(']}')
+            f.write(custom_tail)
     
     def dump_tweet(self, tweet='{}',path='en') :
 	    

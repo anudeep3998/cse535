@@ -167,6 +167,7 @@ try:
     print(msg)
     logger.start(msg)
     twitterStream.filter(track=term_set)
+    
 except KeyboardInterrupt:
     print("["+init_by+"] Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"
     logger.end("["+init_by+"] Caught KeyboardInterrupt :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-1-int_german-int_russian)+"] / T["+str(count))+"]"

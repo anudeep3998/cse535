@@ -5,7 +5,7 @@ import urllib
 
 class customTweet :
     
-    _id = '0'               #user_id of the tweeter
+    _id = '0'               #id of the tweet
     lang = 'en'             #language of the tweeet
     created_at = ''         #UTC time when the tweet was posted
     coordinates = [-1,-1]   #[longitude,latitude]
@@ -13,6 +13,21 @@ class customTweet :
     retweet_status = False
     quote_status = False
     user_lang = 'en'
+    
+    place_id = ''           #place.id
+    place_type = ''         #place.place_type
+    place_full_name = ''    #place.place_full_name
+    place_country_code = '' #plce.country_code
+    place_country = ''      #place.country
+    
+    hashtags = []           #entities.hashtags[].text
+    trends = []             #entities.trends[].text
+    urls = []               #entities.urls[].url
+    expanded_urls = []      #entities.urls[].expanded_url
+    symbols = []            #entites.symbols[].text
+    
+    timestamp = 0           #timestamp_ms
+    
     
     lang_set_en = ['en','en-us','en-gb','en-au','en-ca','en-nz','en-ie','en-za','en-jm','en-bz','en-tt','en-in']
     lang_set_de = ['de','de-ch','de-at','de-li','de-lu']
@@ -76,7 +91,83 @@ class customTweet :
                 self.quote_status = True
         except KeyError:
             pass
-
+        
+        try:
+            if not json_text['place']:
+                self.place_id = ''
+                self.place_type = ''
+                self.place_full_name = ''
+                self.place_country = ''
+                self.place_country_code = ''
+            else:
+                try:
+                    self.place_id = json_text['place']['id']
+                    self.place_type = json_text['place']['place_type']
+                    self.place_full_name = json_text['place']['full_name']
+                    self.place_country_code = json_text['place']['country_code']
+                    self.place_country = json_text['place']['country']
+                except KeyError:
+                    pass
+        except KeyError:
+            self.place_id = ''
+            self.place_type = ''
+            self.place_full_name = ''
+            self.place_country = ''
+            self.place_country_code = ''
+        
+        try:
+            if not json_text['entites'] :
+                try:
+                    if not json_text['entites']['hashtags'] :
+                        self.hashtags = []
+                    else:
+                        for h in json_text['entites']['hashtags']:
+                            self.hashtags.append(h['text'])
+                except KeyError:
+                    self.hashtags = []
+                    
+                try:
+                    if not json_text['entites']['trends'] :
+                        self.trends = []
+                    else:
+                        for t in json_text['entites']['trends']:
+                            self.trends.append(t['text'])
+                except KeyError:
+                    self.trends = []
+                    
+                try:
+                    if not json_text['entites']['symbols'] :
+                        self.symbols = []
+                    else:
+                        for s in json_text['entites']['symbols']:
+                            self.symbols.append(s['text'])
+                except KeyError:
+                    self.symbols = []
+                    
+                try:
+                    if not json_text['entites']['urls'] :
+                        self.urls = []
+                        self.expanded_urls = []
+                    else:
+                        for u in json_text['entites']['urls']:
+                            self.urls.append(urllib.parse.quote_plus(u['url']))
+                            self.expanded_urls.append(urllib.parse.quote_plus(u['expanded_url']))
+                except KeyError:
+                        self.urls = []
+                        self.expanded_urls = []
+        except KeyError:
+            self.hashtags = []
+            self.trends = []
+            self.symbols = []
+            self.urls = []
+            self.expanded_urls = []
+            
+        try:
+            self.timestamp = json_text['timestamp_ms']
+        except KeyError:
+            self.timestamp = 0
+        
+    #currently not in use. Add other variables to complete and use
     def set_vals(self, _id='0',lang='en',created_at='',coordinates=[-1,-1],text='',retweet_status=False,quote_status=False, user_lang='en'):
         self._id = _id
         self.lang = lang
@@ -118,6 +209,38 @@ class customTweet :
         str_tweet += ' "created_at" : "'+ self.created_at + '",'
         str_tweet += ' "coordinates" : { "longitude" : '+ str(self.coordinates[0]) + ', "latitude" :' + str(self.coordinates[1]) + '},'
         str_tweet += ' "text" : "'+ urllib.parse.quote_plus(self.text) + '"'
+        str_tweet += '}]'
+        
+        #print(json.loads(str_tweet))
+        return str_tweet
+
+    def encode_to_json2 (self):
+        str_tweet = '[{'
+        str_tweet += ' "id" : "'+ self._id + '",'
+        str_tweet += ' "lang" : "'+ self.lang + '",'
+        str_tweet += ' "created_at" : "'+ self.created_at + '",'
+        str_tweet += ' "coordinates" : ['+ str(self.coordinates[0]) + ', ' + str(self.coordinates[1]) + '],'
+        #str_tweet += ' "text" : "'+ urllib.parse.quote_plus(self.text) + '",'
+        str_tweet += ' "place_id" : "'+ self.place_id + '",'
+        str_tweet += ' "place_type" : "'+ self.place_type + '",'
+        str_tweet += ' "place_full_name" : "'+ self.place_full_name + '",'
+        str_tweet += ' "place_country_code" : "'+ self.place_country_code + '",'
+        str_tweet += ' "place_country" : "'+ self.place_country + '",'
+        str_tweet += ' "hashtags" : "'+ str(self.hashtags) + '",'
+        str_tweet += ' "trends" : "'+ str(self.trends) + '",'
+        str_tweet += ' "symbols" : "'+ str(self.symbols) + '",'
+        str_tweet += ' "urls" : "'+ str(self.urls) + '",'
+        str_tweet += ' "expanded_urls" : "'+ str(self.expanded_urls) + '",'
+        str_tweet += ' "timestamp" : "'+ self.timestamp + '",'
+        str_tweet += ' "text" : "'+ urllib.parse.quote_plus(self.text) + '"'
+        
+        if is_lang_english(self):
+            str_tweet += ', "text_en" : "'+ urllib.parse.quote_plus(self.text) + '"'
+        elif is_lang_russian(self):
+            str_tweet += ', "text_ru" : "'+ urllib.parse.quote_plus(self.text) + '"'
+        elif is_lang_german(self):
+            str_tweet += ', "text_de" : "'+ urllib.parse.quote_plus(self.text) + '"'
+
         str_tweet += '}]'
         
         #print(json.loads(str_tweet))
