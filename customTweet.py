@@ -1,6 +1,6 @@
 
 import json
-import urllib
+from urllib import parse
 
 
 class customTweet :
@@ -28,7 +28,7 @@ class customTweet :
     
     timestamp = 0           #timestamp_ms
     
-    
+    json_text = {}
     lang_set_en = ['en','en-us','en-gb','en-au','en-ca','en-nz','en-ie','en-za','en-jm','en-bz','en-tt','en-in']
     lang_set_de = ['de','de-ch','de-at','de-li','de-lu']
     lang_set_ru = ['ru','ru-mo']
@@ -42,48 +42,38 @@ class customTweet :
     def __init__(self, text):
     
         try:
-            json_text = json.loads(text)
+            json_text = json.loads(text, encoding="utf-8")
             self._id = json_text['id_str']
-            print("id : "+self._id)
         except KeyError:
             pass
         
         try:
             self.lang = json_text['lang']
-            print("lang : "+self.lang)
         except KeyError:
             pass
         
         try:
             self.user_lang = json_text['user']['lang']
-            print("u_lang : "+self.user_lang)
         except KeyError:
             pass
         
         try:
             self.created_at = json_text['created_at']
-            print("created_at : "+self.created_at)
         except KeyError:
             pass
         
-        '''try:
-            print("coordinates : "+self.coordinates)
+        try:
             if (json_text['coordinates']) and ((json_text['coordinates']['coordinates'])) :
-                print("coordinates : "+self.coordinates)
                 self.coordinates = json_text['coordinates']['coordinates']
             else:
                 self.coordinates = [-1,-1]
-            print("coordinates : "+self.coordinates)
         except KeyError:
             self.coordinates = [-1,-1]
-            print("KeyError coordinates : "+self.coordinates)
         except TypeError:
             self.coordinates = [-1,-1]
-            print("TypeError coordinates : "+self.coordinates)'''
         
         try:
             self.text = json_text['text']
-            print("text : "+self.text)
         except KeyError:
             pass
         
@@ -92,7 +82,6 @@ class customTweet :
                 self.retweet_status = False
             else :
                 self.retweet_status = True
-            print("retweet_status : "+self.retweet_status)
         except KeyError:
             pass
         
@@ -101,11 +90,10 @@ class customTweet :
                 self.quote_status = False
             else :
                 self.quote_status = True
-            print("quote_status : "+self.quote_status)
         except KeyError:
             pass
         
-        '''
+        
         try:
             if not json_text['place']:
                 self.place_id = ''
@@ -164,8 +152,8 @@ class customTweet :
                         self.expanded_urls = []
                     else:
                         for u in json_text['entites']['urls']:
-                            self.urls.append(urllib.parse.quote_plus(u['url']))
-                            self.expanded_urls.append(urllib.parse.quote_plus(u['expanded_url']))
+                            self.urls.append(parse.quote_plus(u['url']))
+                            self.expanded_urls.append(parse.quote_plus(u['expanded_url']))
                 except KeyError:
                         self.urls = []
                         self.expanded_urls = []
@@ -180,9 +168,14 @@ class customTweet :
             self.timestamp = json_text['timestamp_ms']
         except KeyError:
             self.timestamp = 0
-        '''
+        
 
-
+    def sanitize_str(self,string):
+        string = string.replace('\n','')
+        string = string.replace('\r','')
+        string = string.replace('\t','')
+        return string.replace('"','')
+ 
     #currently not in use. Add other variables to complete and use
     def set_vals(self, _id='0',lang='en',created_at='',coordinates=[-1,-1],text='',retweet_status=False,quote_status=False, user_lang='en'):
         self._id = _id
@@ -196,8 +189,8 @@ class customTweet :
 
     def is_lang_english (self):
         #global lang_set_en
-        #return self.lang in self.lang_set_en
-        return False
+        return self.lang in self.lang_set_en
+        #return False
         
     def is_lang_german (self):
         #global lang_set_de
@@ -224,14 +217,14 @@ class customTweet :
         str_tweet += ' "lang" : "'+ self.lang + '",'
         str_tweet += ' "created_at" : "'+ self.created_at + '",'
         str_tweet += ' "coordinates" : { "longitude" : '+ str(self.coordinates[0]) + ', "latitude" :' + str(self.coordinates[1]) + '},'
-        str_tweet += ' "text" : "'+ urllib.parse.quote_plus(self.text) + '"'
+        str_tweet += ' "text" : "'+ parse.quote_plus(self.text) + '"'
         str_tweet += '}]'
         
         #print(json.loads(str_tweet))
         return str_tweet
 
     def encode_to_json2 (self):
-        str_tweet = '[{'
+        str_tweet = '{'
         str_tweet += ' "id" : "'+ self._id + '",'
         str_tweet += ' "lang" : "'+ self.lang + '",'
         str_tweet += ' "created_at" : "'+ self.created_at + '",'
@@ -247,20 +240,23 @@ class customTweet :
         str_tweet += ' "symbols" : "'+ str(self.symbols) + '",'
         str_tweet += ' "urls" : "'+ str(self.urls) + '",'
         str_tweet += ' "expanded_urls" : "'+ str(self.expanded_urls) + '",'
-        str_tweet += ' "timestamp" : "'+ self.timestamp + '",'
-        str_tweet += ' "text" : "'+ urllib.parse.quote_plus(self.text) + '"'
+        str_tweet += ' "timestamp" : "'+ str(self.timestamp) + '",'
+        str_tweet += ' "text" : "'+ self.sanitize_str(self.text) + '"'
         
-        if is_lang_english(self):
-            str_tweet += ', "text_en" : "'+ urllib.parse.quote_plus(self.text) + '"'
-        elif is_lang_russian(self):
-            str_tweet += ', "text_ru" : "'+ urllib.parse.quote_plus(self.text) + '"'
-        elif is_lang_german(self):
-            str_tweet += ', "text_de" : "'+ urllib.parse.quote_plus(self.text) + '"'
+        if self.is_lang_english():
+            str_tweet += ', "text_en" : "'+ self.sanitize_str(self.text) + '"'
+        elif self.is_lang_russian():
+            str_tweet += ', "text_ru" : "'+ self.sanitize_str(self.text) + '"'
+        elif self.is_lang_german():
+            str_tweet += ', "text_de" : "'+ self.sanitize_str(self.text) + '"'
 
-        str_tweet += '}]'
+        str_tweet += '}'
         
         #print(json.loads(str_tweet))
         return str_tweet
 
     def is_original(self) :
         return ((not self.retweet_status) and (not self.quote_status))
+        
+    def encode_to_json2_bin(self):
+        return self.encode_to_json2.encode("utf-8")
