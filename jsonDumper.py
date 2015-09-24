@@ -5,7 +5,7 @@ import sys
 
 _static_path = "/home/anudeep3998/cse535/code/"
 from_file_path = [_static_path+'tweetDump/eng2.txt', _static_path+'tweetDump/ger2.txt', _static_path+'tweetDump/rus2.txt']
-to_file_path = [_static_path+'tweetDump/cus_eng_encoded.json', _static_path+'tweetDump/cus_ger_encoded.json', _static_path+'tweetDump/cus_rus_encoded.json']
+to_file_path = [_static_path+'tweetDump/cus_eng_encoded2.json', _static_path+'tweetDump/cus_ger_encoded2.json', _static_path+'tweetDump/cus_rus_encoded2.json']
 custom_header = '['
 custom_tail = ']'
 

@@ -108,6 +108,7 @@ class customTweet :
                     self.place_full_name = json_text['place']['full_name']
                     self.place_country_code = json_text['place']['country_code']
                     self.place_country = json_text['place']['country']
+                    #print(json_text['place'])
                 except KeyError:
                     pass
         except KeyError:
@@ -118,40 +119,45 @@ class customTweet :
             self.place_country_code = ''
         
         try:
-            if not json_text['entites'] :
+            self.hashtags = []
+            self.trends = []
+            self.symbols = []
+            self.urls = []
+            self.expanded_urls = []
+            if json_text['entities'] :
                 try:
-                    if not json_text['entites']['hashtags'] :
+                    if not json_text['entities']['hashtags'] :
                         self.hashtags = []
                     else:
-                        for h in json_text['entites']['hashtags']:
+                        for h in json_text['entities']['hashtags']:
                             self.hashtags.append(h['text'])
                 except KeyError:
                     self.hashtags = []
                     
                 try:
-                    if not json_text['entites']['trends'] :
+                    if not json_text['entities']['trends'] :
                         self.trends = []
                     else:
-                        for t in json_text['entites']['trends']:
+                        for t in json_text['entities']['trends']:
                             self.trends.append(t['text'])
                 except KeyError:
                     self.trends = []
                     
                 try:
-                    if not json_text['entites']['symbols'] :
+                    if not json_text['entities']['symbols'] :
                         self.symbols = []
                     else:
-                        for s in json_text['entites']['symbols']:
+                        for s in json_text['entities']['symbols']:
                             self.symbols.append(s['text'])
                 except KeyError:
                     self.symbols = []
                     
                 try:
-                    if not json_text['entites']['urls'] :
+                    if not json_text['entities']['urls'] :
                         self.urls = []
                         self.expanded_urls = []
                     else:
-                        for u in json_text['entites']['urls']:
+                        for u in json_text['entities']['urls']:
                             self.urls.append(parse.quote_plus(u['url']))
                             self.expanded_urls.append(parse.quote_plus(u['expanded_url']))
                 except KeyError:
@@ -163,7 +169,7 @@ class customTweet :
             self.symbols = []
             self.urls = []
             self.expanded_urls = []
-            
+
         try:
             self.timestamp = json_text['timestamp_ms']
         except KeyError:
@@ -235,10 +241,10 @@ class customTweet :
         str_tweet += ' "place_full_name" : "'+ self.place_full_name + '",'
         str_tweet += ' "place_country_code" : "'+ self.place_country_code + '",'
         str_tweet += ' "place_country" : "'+ self.place_country + '",'
-        str_tweet += ' "hashtags" : "'+ str(self.hashtags) + '",'
+        str_tweet += ' "tweet_hashtags" : "'+ str(self.hashtags) + '",'
         str_tweet += ' "trends" : "'+ str(self.trends) + '",'
         str_tweet += ' "symbols" : "'+ str(self.symbols) + '",'
-        str_tweet += ' "urls" : "'+ str(self.urls) + '",'
+        str_tweet += ' "tweet_urls" : "'+ str(self.urls) + '",'
         str_tweet += ' "expanded_urls" : "'+ str(self.expanded_urls) + '",'
         str_tweet += ' "timestamp" : "'+ str(self.timestamp) + '",'
         str_tweet += ' "text" : "'+ self.sanitize_str(self.text) + '"'

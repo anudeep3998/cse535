@@ -104,7 +104,8 @@ class twitterListener(StreamListener) :
             
             if (interesting_count <= _INTERESTING_LIMIT and count <= _TOTAL_LIMIT) or interesting_count <= _STRICT_INTERESTING_LIMIT_LOWER :
                 try:
-                    req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
+                    #req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
+                    pass
                 except Exception:
                         logger.log("Solr offline. Attempting wake")
                         p = subprocess.Popen(str("/home/anudeep3998/cse535/solr/solr-5.3.0/bin/solr start -e cloud -noprompt"), stdout=subprocess.PIPE, shell=True)
@@ -121,8 +122,8 @@ class twitterListener(StreamListener) :
                 '''
                     commit both cores. One duplicate tweet will be added to one of the core, but shouldn't matter over the other count
                 '''
-                req = requests.post(update_url[1]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
-                req = requests.post(update_url[0]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
+                #req = requests.post(update_url[1]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
+                #req = requests.post(update_url[0]+update_url_args[0], data = tweet.encode_to_json(), headers=headers)
                 msg = "["+init_by+"] Successfully completed dump :: Total # : G["+ str(int_german)+"]-R["+str(int_russian)+"] | E["+str(interesting_count-int_german-int_russian)+"] / T["+str(count)+"]"
                 print(msg)
                 logger.end(msg)
