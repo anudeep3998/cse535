@@ -4,8 +4,8 @@ from urllib import parse
 import sys
 
 _static_path = "/home/anudeep3998/cse535/code/"
-from_file_path = [_static_path+'tweetDump/eng2.txt', _static_path+'tweetDump/ger2.txt', _static_path+'tweetDump/rus2.txt']
-to_file_path = [_static_path+'tweetDump/cus_eng_encoded2.json', _static_path+'tweetDump/cus_ger_encoded2.json', _static_path+'tweetDump/cus_rus_encoded2.json']
+from_file_path = [_static_path+'tweetDump/eng3.txt', _static_path+'tweetDump/ger3.txt', _static_path+'tweetDump/rus3.txt']
+to_file_path = [_static_path+'tweetDump/cus_eng_encoded3.json', _static_path+'tweetDump/cus_ger_encoded3.json', _static_path+'tweetDump/cus_rus_encoded3.json']
 custom_header = '['
 custom_tail = ']'
 
@@ -16,7 +16,7 @@ json_writer = fileWriter(to_file_path,custom_header,custom_tail)
 t=0
 for fr in from_file_path:
     print("Dumping data from : "+fr)
-    with open (fr,"r+",encoding='utf-8') as f:
+    with open (fr,"r",encoding='utf-8') as f:
         for line in  f:
             if len(line) > 10 :
                 try:

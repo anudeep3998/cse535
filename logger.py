@@ -36,15 +36,15 @@ def end(msg):
     end_nano = int(round(time.time()))
     elipsed_nano = end_nano - start_nano
     
-    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/ger2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
+    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/ger3.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
     ger_count = str(int(output)) #remove byte encoding
 
-    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/rus2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
+    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/rus3.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
     rus_count = str(int(output))
     
-    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/eng2.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
+    p = subprocess.Popen(str("cat "+_static_path+"tweetDump/eng3.txt | grep '"+'"id"'+"' | wc -l"), stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
     eng_count = str(int(output))
     

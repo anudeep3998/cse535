@@ -27,7 +27,7 @@ init_by = 'user'
 
 _TOTAL_LIMIT = 500
 _INTERESTING_LIMIT = 100
-_STRICT_INTERESTING_LIMIT_LOWER = 5
+_STRICT_INTERESTING_LIMIT_LOWER = 10
 
 tw_writer = fileWriter()
 
@@ -103,7 +103,7 @@ class twitterListener(StreamListener) :
             
             
             if (interesting_count <= _INTERESTING_LIMIT and count <= _TOTAL_LIMIT) or interesting_count <= _STRICT_INTERESTING_LIMIT_LOWER :
-                try:
+                '''try:
                     #req = requests.post(update_url[count%2]+update_url_args[0 if count%25==0 else 1], data = tweet.encode_to_json(), headers=headers)
                     pass
                 except Exception:
@@ -115,7 +115,8 @@ class twitterListener(StreamListener) :
                             sys.exit(0)
                         else :
                             logger.log("solr wake successful. Continuing..")
-                
+                '''
+                pass
                 #print(req.text)
                 #print("Pushing to SOLR : return# "+str(req.status_code))
             else:
