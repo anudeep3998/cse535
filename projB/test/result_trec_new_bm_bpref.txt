@@ -1,0 +1,15 @@
+bpref                 	001	0.5475
+bpref                 	002	0.8191
+bpref                 	003	0.9167
+bpref                 	004	0.9662
+bpref                 	005	0.5000
+bpref                 	006	0.5556
+bpref                 	007	0.5000
+bpref                 	008	1.0000
+bpref                 	009	1.0000
+bpref                 	010	1.0000
+bpref                 	011	1.0000
+bpref                 	012	0.8521
+bpref                 	013	0.1247
+bpref                 	014	0.6790
+bpref                 	all	0.7472

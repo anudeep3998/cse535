@@ -1,0 +1,154 @@
+
+Query params : qf=text_dump^1+tweet_hashtags^0.9+text_de_ngrams&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	4528	-6200
+Rel docs :	210	210	0
+Rel_Rev docs :	207	204	-3
+RPrec docs :	0.7083	0.6721	-0.03620000000000001
+Map score :	0.7521	0.7316	-0.020499999999999963
+NDCG score :	0.9215	0.9054	-0.016100000000000003
+BPref score :	0.7892	0.7472	-0.04200000000000004
+F 0.5 score :	0.0337	0.2555	0.2218
+
+Query params : qf=text_dump^1+tweet_hashtags^0.9+text_de_ngram&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.5921	-0.11620000000000008
+Map score :	0.7521	0.6306	-0.12149999999999994
+NDCG score :	0.9215	0.8486	-0.07289999999999996
+BPref score :	0.7892	0.7321	-0.05710000000000004
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^1+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6362	-0.07210000000000005
+Map score :	0.7521	0.7203	-0.03179999999999994
+NDCG score :	0.9215	0.9117	-0.009800000000000031
+BPref score :	0.7892	0.7489	-0.0403
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_en^1+text_ru^0.7+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	7357	-3371
+Rel docs :	210	210	0
+Rel_Rev docs :	207	205	-2
+RPrec docs :	0.7083	0.6264	-0.08190000000000008
+Map score :	0.7521	0.6657	-0.08640000000000003
+NDCG score :	0.9215	0.8805	-0.041000000000000036
+BPref score :	0.7892	0.7565	-0.03270000000000006
+F 0.5 score :	0.0337	0.1801	0.1464
+
+Query params : qf=text_dump^1+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	7788	-2940
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6437	-0.06459999999999999
+Map score :	0.7521	0.7125	-0.03959999999999997
+NDCG score :	0.9215	0.9108	-0.010699999999999932
+BPref score :	0.7892	0.7467	-0.04249999999999998
+F 0.5 score :	0.0337	0.1438	0.1101
+
+Query params : qf=text_dump^1+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6506	-0.057700000000000085
+Map score :	0.7521	0.7261	-0.026000000000000023
+NDCG score :	0.9215	0.913	-0.008499999999999952
+BPref score :	0.7892	0.7522	-0.03700000000000003
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^0.7+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6302	-0.07810000000000006
+Map score :	0.7521	0.7029	-0.04920000000000002
+NDCG score :	0.9215	0.9074	-0.014100000000000001
+BPref score :	0.7892	0.7463	-0.04290000000000005
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^2+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.668	-0.0403
+Map score :	0.7521	0.7314	-0.02069999999999994
+NDCG score :	0.9215	0.9117	-0.009800000000000031
+BPref score :	0.7892	0.7352	-0.05400000000000005
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^2.5+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6711	-0.03720000000000001
+Map score :	0.7521	0.7321	-0.020000000000000018
+NDCG score :	0.9215	0.911	-0.010499999999999954
+BPref score :	0.7892	0.7367	-0.05249999999999999
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^4+tweet_hashtags^0.9+text_de_ngram^0.5&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.668	-0.0403
+Map score :	0.7521	0.7284	-0.023699999999999943
+NDCG score :	0.9215	0.9122	-0.009299999999999975
+BPref score :	0.7892	0.7317	-0.057499999999999996
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^4+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6731	-0.03520000000000001
+Map score :	0.7521	0.7296	-0.022499999999999964
+NDCG score :	0.9215	0.9097	-0.011800000000000033
+BPref score :	0.7892	0.7374	-0.05179999999999996
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^2.5+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6711	-0.03720000000000001
+Map score :	0.7521	0.7321	-0.020000000000000018
+NDCG score :	0.9215	0.911	-0.010499999999999954
+BPref score :	0.7892	0.7367	-0.05249999999999999
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^3+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6711	-0.03720000000000001
+Map score :	0.7521	0.731	-0.021100000000000008
+NDCG score :	0.9215	0.9102	-0.011299999999999977
+BPref score :	0.7892	0.7363	-0.05290000000000006
+F 0.5 score :	0.0337	0.2092	0.1755
+
+Query params : qf=text_dump^2.7+tweet_hashtags^0.9+text_de_ngram^0.2&mm=1&pf=text_dump
+Index similarity : bm
+Total docs :	10728	5855	-4873
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6711	-0.03720000000000001
+Map score :	0.7521	0.7315	-0.02059999999999995
+NDCG score :	0.9215	0.9109	-0.010599999999999943
+BPref score :	0.7892	0.7363	-0.05290000000000006
+F 0.5 score :	0.0337	0.2092	0.1755

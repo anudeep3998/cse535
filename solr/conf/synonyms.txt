@@ -17,6 +17,17 @@ bbbfoo => bbbfoo bbbbar
 cccfoo => cccbar cccbaz
 fooaaa,baraaa,bazaaa
 
+rt, retweet
+ammo, weapons, arms
+EU, european, europe
+refugee, asylum
+ISIS, islamic state
+Angela, Merkel, Chancellor
+kill, kills, assiassinate
+David, Cameron, UK, PM
+Hezbollah, hizbullah, hizballah
+fund, fundriser
+
 # Some synonym groups specific to this example
 GB,gib,gigabyte,gigabytes
 MB,mib,megabyte,megabytes
