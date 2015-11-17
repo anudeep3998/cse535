@@ -1,0 +1,22 @@
+
+Query params : qf=text_en^1+text_ru^0.8+text_de^1+tweet_hashtags^0.6&mm=1&pf=text_dump
+Index similarity : lm
+Total docs :	10728	3067	-7661
+Rel docs :	210	110	-100
+Rel_Rev docs :	207	13	-194
+RPrec docs :	0.7083	0.0476	-0.6607000000000001
+Map score :	0.7521	0.0523	-0.6998
+NDCG score :	0.9215	0.0695	-0.852
+BPref score :	0.7892	0.0567	-0.7325
+F 0.5 score :	0.0337	0.0015	-0.0322
+
+Query params : qf=text_en^1+text_ru^0.8+text_de^1+tweet_hashtags^0.6&mm=1&pf=text_dump
+Index similarity : lm
+Total docs :	10728	4948	-5780
+Rel docs :	210	210	0
+Rel_Rev docs :	207	207	0
+RPrec docs :	0.7083	0.6889	-0.019400000000000084
+Map score :	0.7521	0.7577	0.005600000000000049
+NDCG score :	0.9215	0.9269	0.00539999999999996
+BPref score :	0.7892	0.7572	-0.03200000000000003
+F 0.5 score :	0.0337	0.2531	0.21939999999999998
