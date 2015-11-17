@@ -28,7 +28,7 @@ res = os.popen("curl 'http://localhost:8983/solr/vsm/update/json?commit=true' --
 '''
 
 
-infn = "/home/anudeep3998/cse535/code/projB/new_queries.txt"
+infn = "/home/anudeep3998/cse535/code/projB/queries.txt"
 q_count = 0
 
 
@@ -37,7 +37,7 @@ q_count = 0
 #lm : 
 #custom_params = "qf=text_en^1+text_ru^0.8+text_de^1+tweet_hashtags^0.6&mm=1&pf=text_dump"
 #vsm : 
-custom_params = "qf=text_en^1+text_ru^0.7+text_de^1.3+tweet_hashtags^0.3&mm=1&pf=text_dump"
+custom_params = "qf=text_en^1.2+text_ru^1+text_de^1+tweet_hashtags^0.5&mm=1&pf=text_dump"
 
 
 
@@ -67,8 +67,8 @@ for i in range(0,q_count):
     else:
         qid = '0'+ str(i+1)
         
-    outfn = similarity+"/"+str(i+1)+".txt"
-    with open(outfn, 'w+') as outf : 
+    #outfn = similarity+"/"+str(i+1)+".txt"
+    with open(outfn, 'a+') as outf : 
             
         IRModel='default'
         #IRModel='BM25Similarity'
@@ -90,11 +90,13 @@ for i in range(0,q_count):
         outf.close()
     #outf.close()
 
-result_file = 'result2.txt'
+result_file = 'result.txt'
 trec_file = 'result_trec_new'
 old_file = 'result_trec_old'
 analyzed_file = 'result_analyzed_new'
 exts = ['','_map','_ndcg','_bpref','_F']
+
+trec_file += '_'+similarity
 
 res = subprocess.call('trec_eval -q -c -M 1000 ../qrel.txt ' + result_file + ' > ' + trec_file + '.txt', shell=True)
 res = subprocess.call('trec_eval -q -c -M 1000 -m map ../qrel.txt ' + result_file + ' > ' + trec_file + '_map.txt', shell=True)
