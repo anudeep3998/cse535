@@ -1,25 +1,35 @@
 Components
 ---------------
 
-1. Content Tagging
-2. Summarization ??
-3. cross-lingual ?
+1. Content Tagging - Confirmed [basic + graph??]
+2. cross-lingual  - Confirmed
+3. Summarization ??
 4. multi document analysis
 
-
-1. Content Tagging
+Languages
 ----------------
-topia.termextract 1.1.0
+English
+Russian
+German
+French
+Arabic ??
+Korean ??
+Spanish
+Portugese
+
 
 Content-tagging tools
 ----------------------
 Stanford Tagger
 Alchemy
+topia.termextract 1.1.0
 
 Cross-lingual
 --------------
 Microsoft Translator API
 Yandex
+Google Translate
+
 
 UI Toolkits
 ------------
