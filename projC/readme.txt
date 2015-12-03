@@ -12,5 +12,14 @@ Components
 topia.termextract 1.1.0
 
 Content-tagging tools
+----------------------
 Stanford Tagger
 Alchemy
+
+Cross-lingual
+--------------
+Microsoft Translator API
+
+UI Toolkits
+------------
+Twitter Bootstrap
