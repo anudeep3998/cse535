@@ -19,6 +19,7 @@ Alchemy
 Cross-lingual
 --------------
 Microsoft Translator API
+Yandex
 
 UI Toolkits
 ------------
