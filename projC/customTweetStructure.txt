@@ -5,7 +5,6 @@
     text = ''               #text of tweeet
     retweet_status = False
     quote_status = False
-    user_lang = 'en'
     
     place_id = ''           #place.id
     place_type = ''         #place.place_type
