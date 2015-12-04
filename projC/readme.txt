@@ -25,7 +25,7 @@ Alchemy
 topia.termextract 1.1.0(python)
 tree tagger(multiple tagging, does not support korean)
 ling pipe(seems to be efficient)
-
+Morph Adorner
 Cross-lingual
 --------------
 Microsoft Translator API
