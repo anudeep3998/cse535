@@ -30,16 +30,17 @@ public class SearchTweets {
 				"Russia Syria strikes", "Android", "Australian Open", "World cup", "ice bucket challenge", "iphone 6s", "Real Madrid Cheryshev",
 				"cricket all stars", "Radisson blu Sandton", "racism racist nepotism bigot", "Anonymous", "Donald Trump" };
 
-		String[] topics = { "Russia OR Turkey OR fighter OR jet OR shootdown", "European OR migrant OR crisis", "ISIS OR attack OR Paris",
+		String[] topics = { "Russia OR Turkey OR fighter jet OR shootdown", "European OR migrant OR crisis", "ISIS OR attack OR Paris",
 				"Mark OR Zuckerberg OR Priscilla Chan OR baby Max", "AIDS day", "Holiday", "San OR Bernadino OR shootout",
 				"Syria OR strikes OR vote OR British OR Parliament", "Russia OR Syria OR strikes", "Android", "Australian Open", "World cup",
-				"ice OR bucket OR challenge", "iphone OR 6s", "Real Madrid OR Cheryshev", "cricket OR all stars", "Radisson OR blu OR Sandton",
+				"ice bucket challenge", "iphone OR 6s", "Real Madrid OR Cheryshev", "cricket all stars", "Radisson blu attack",
 				"racism OR racist OR nepotism bigot", "Anonymous", "Donald OR Trump" };
 
 		Date date = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		int j;
+		String lang = "en";
 
 		if (args.length < 1) {
 			System.out.println("java twitter4j.examples.search.SearchTweets [query]");
@@ -59,11 +60,11 @@ public class SearchTweets {
 		// 23-e390,d207,r230 t827 14-e135,d120,r105 t360 16-e150,d135,r135 t420
 		// 19-e105,d150,r150 t405 21-e30,d37,r56 t121 T2133
 		try {
-			Query query = new Query("neymar");
-			query.setLang("en");
-			// query.setSince("2015-12-02");
-			// query.setUntil("2015-12-09");
-//			query.setCount(10);
+			Query query = new Query("Pushkar Borle");
+			query.setLang(lang);
+			query.setSince("2015-12-01");
+			query.setUntil("2015-12-02");
+			// query.setCount(10);
 			QueryResult result;
 			// query.setSinceId(10);
 			do {
@@ -73,20 +74,24 @@ public class SearchTweets {
 				// List<Status> tweets = result.getTweets();
 
 				for (j = 0; j < 20; ++j) {
-					query.setQuery(topic[j]);
+					query.setQuery(topics[j]);
+					query.setCount(30);
 					result = twitter.search(query);
 					// System.out.println(result);
-					System.out.println("FOR "+j);
+					System.out.println("FOR " + j);
+					result.nextQuery();
 					List<Status> tweets1 = result.getTweets();
+					boolean flag;
 
 					for (Status tweet : tweets1) {
 						// Iterator it=tweet.getHashtagEntities().length;
+						flag = true;
 						++cnt;
 						++count;
-						if (cnt % 21 == 0) {
-							cnt = 0;
-							break;
-						}
+						// if (cnt % 21 == 0) {
+						// cnt = 0;
+						// break;
+						// }
 						String text = tweet.getText();
 						text = text.replace("\n", " ");
 						text = text.replace("\"", "");
@@ -108,19 +113,25 @@ public class SearchTweets {
 						// + "\n\t\t\"retweet\":\"" + tweet.isRetweet() +
 						// "\",");
 
+						if (tweet.getQuotedStatus() == null)
+							flag = false;
+
 						System.out.println(count + "\t\t\"id\":\"" + tweet.getId() + "\"," + "\n\t\t\"user_screen_name \":\""
-								+ tweet.getUser().getScreenName() + "\"," + "\n\t\t\"text\":\"" + text + "\"," + "\n\t\t\"created_at\":\""
-								+ d.format(tweet.getCreatedAt()) + "\"," + "\n\t\t\"lang\":\"" + tweet.getLang() + "\"," + "\n\t\t\"location\":\""
-								+ tweet.getUser().getLocation() + "\"," + "\n\t\t\"retweet_status\":\"" + tweet.isRetweet() + "\","
-								+ "\n\t\t\"quote_status\":\"" + tweet.getQuotedStatus() + "\","
+								+ tweet.getUser().getScreenName() + "\"," + "\n\t\t\"text\":\"" + text + "\"," + "\n\t\t\"text_" + lang + "\":\""
+								+ text + "\"," + "\n\t\t\"created_at\":\"" + d.format(tweet.getCreatedAt()) + "\"," + "\n\t\t\"lang\":\""
+								+ tweet.getLang() + "\"," + "\n\t\t\"location\":\"" + tweet.getUser().getLocation() + "\","
+								+ "\n\t\t\"retweet_status\":\"" + tweet.isRetweet() + "\"," + "\n\t\t\"quote_status\":\"" + flag + "\","
 								// + "\n\t\t\"place_id\":\"" +
 								// tweet.getPlace().getId()
 								// + "\"," + "\n\t\t\"place_type\":\"" +
-								// tweet.getPlace().getPlaceType() + "\"," +
+								// tweet.getPlace().getPlaceType() +
+								// "\"," +
 								// "\n\t\t\"place_full_name\":\""
-								// + tweet.getPlace().getFullName() + "\"," +
+								// + tweet.getPlace().getFullName() +
+								// "\"," +
 								// "\n\t\t\"place_country_code\":\"" +
-								// tweet.getPlace().getCountryCode() + "\","
+								// tweet.getPlace().getCountryCode() +
+								// "\","
 								// + "\n\t\t\"place_country\":\"" +
 								// tweet.getPlace().getCountry() + "\","
 								+ "\n\t\t\"favorite_count \":\"" + tweet.getFavoriteCount() + "\"," + "\n\t\t\"retweet_count \":\""
@@ -154,11 +165,11 @@ public class SearchTweets {
 							out.println("\t{");
 
 							out.println("\t\t\"id\":\"" + tweet.getId() + "\"," + "\n\t\t\"user_screen_name \":\"" + tweet.getUser().getScreenName()
-									+ "\"," + "\n\t\t\"text\":\"" + text + "\"," + "\n\t\t\"created_at\":\"" + d.format(tweet.getCreatedAt()) + "\","
-									+ "\n\t\t\"lang\":\"" + tweet.getLang() + "\"," + "\n\t\t\"location\":\"" + tweet.getUser().getLocation() + "\","
-									+ "\n\t\t\"retweet_status\":\"" + tweet.isRetweet() + "\"," + "\n\t\t\"quote_status\":\""
-									+ tweet.getQuotedStatus()
-									// + "\"," + "\n\t\t\"place_id\":\"" +
+									+ "\"," + "\n\t\t\"text\":\"" + text + "\"," + "\n\t\t\"text_" + lang + "\":\"" + text + "\","
+									+ "\n\t\t\"created_at\":\"" + d.format(tweet.getCreatedAt()) + "\"," + "\n\t\t\"lang\":\"" + tweet.getLang()
+									+ "\"," + "\n\t\t\"location\":\"" + tweet.getUser().getLocation() + "\"," + "\n\t\t\"retweet_status\":\""
+									+ tweet.isRetweet() + "\"," + "\n\t\t\"quote_status\":\"" + flag + "\","
+									// + "\n\t\t\"place_id\":\"" +
 									// tweet.getPlace().getId() + "\"," +
 									// "\n\t\t\"place_type\":\""
 									// + tweet.getPlace().getPlaceType() + "\","
@@ -266,7 +277,7 @@ public class SearchTweets {
 					}
 					System.out.println(cnt);
 				}
-				if(j==20)
+				if (j == 20)
 					break;
 			} while ((query = result.nextQuery()) != null);
 
