@@ -1,6 +1,6 @@
-﻿
 import json
 from urllib import parse
+from dateutil import parser
 
 
 class customTweet :
@@ -106,7 +106,11 @@ class customTweet :
             pass
         
         try:
-            self.created_at = json_text['created_at']
+            d = json_text['created_at']
+            #input       Wed Dec 09 01:49:57 +0000 2015
+            #output      yyyy-MM-dd'T'HH:mm:ss'Z'
+            dx = parser.parse(d)
+            self.created_at = dx.strftime("%Y-%m-%dT%H:%M:%SZ")
         except KeyError:
             pass
         
@@ -271,7 +275,25 @@ class customTweet :
         str_tweet += ' "user_verified" : "'+ str(self.user_verified) + '",'
         str_tweet += ' "user_followers_count" : "'+ str(self.user_followers_count) + '",'
         str_tweet += ' "user_screen_name" : "'+ self.sanitize_str(self.user_screen_name) + '",'
-        str_tweet += ' "user_name" : "'+ self.sanitize_str(self.user_name) + '"'
+        str_tweet += ' "user_name" : "'+ self.sanitize_str(self.user_name) + '",'
+
+        if (self.lang == 'ar'):
+            str_tweet += ' "text_ar" : "'+ self.sanitize_str(self.text) + '"'
+
+        if (self.lang == 'ko'):
+            str_tweet += ' "text_ko" : "'+ self.sanitize_str(self.text) + '"'
+
+        if (self.lang == 'en'):
+            str_tweet += ' "text_en" : "'+ self.sanitize_str(self.text) + '"'
+
+        if (self.lang == 'ru'):
+            str_tweet += ' "text_ru" : "'+ self.sanitize_str(self.text) + '"'
+
+        if (self.lang == 'fr'):
+            str_tweet += ' "text_fr" : "'+ self.sanitize_str(self.text) + '"'
+
+        if (self.lang == 'sp'):
+            str_tweet += ' "text_sp" : "'+ self.sanitize_str(self.text) + '"'
 
 
         str_tweet += '}'
