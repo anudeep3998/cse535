@@ -107,7 +107,7 @@ class twitterListener(StreamListener) :
         print("Topic : "+ str(current_topic)+" count ::"+str(count)+" lang : "+tweet.lang)
         if (count < _INTERESTING_LIMIT_PER_TOPIC) :
             with open(os.path.join(dirname,output_file_prefix + str(current_topic) + ".json"),"a+",encoding="utf-8") as out :
-                out.write(tweet.encode_to_json()+"\n")
+                out.write(tweet.encode_to_json()+",\n")
         else :
             count = 0
             return False
