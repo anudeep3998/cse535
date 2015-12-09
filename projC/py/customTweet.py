@@ -1,3 +1,4 @@
+
 import json
 from urllib import parse
 from dateutil import parser
@@ -254,7 +255,7 @@ class customTweet :
         str_tweet += ' "lang" : "'+ self.lang + '",'
         str_tweet += ' "created_at" : "'+ self.created_at + '",'
         str_tweet += ' "coordinates" : ['+ str(self.coordinates[0]) + ', ' + str(self.coordinates[1]) + '],'
-        str_tweet += ' "text" : "'+ self.sanitize_str(self.text) + '",'
+        str_tweet += ' "text" : "'+ self.sanitize_str(self.text) + '  ",'
         str_tweet += ' "place_id" : "'+ self.place_id + '",'
         str_tweet += ' "place_type" : "'+ self.place_type + '",'
         str_tweet += ' "place_full_name" : "'+ self.place_full_name + '",'
@@ -278,22 +279,22 @@ class customTweet :
         str_tweet += ' "user_name" : "'+ self.sanitize_str(self.user_name) + '",'
 
         if (self.lang == 'ar'):
-            str_tweet += ' "text_ar" : "'+ self.sanitize_str(self.text) + '"'
+            str_tweet += ' "text_ar" : "'+ self.sanitize_str(self.text) + '  "'
 
         if (self.lang == 'ko'):
-            str_tweet += ' "text_ko" : "'+ self.sanitize_str(self.text) + '"'
+            str_tweet += ' "text_ko" : "'+ self.sanitize_str(self.text) + '  "'
 
         if (self.lang == 'en'):
-            str_tweet += ' "text_en" : "'+ self.sanitize_str(self.text) + '"'
+            str_tweet += ' "text_en" : "'+ self.sanitize_str(self.text) + '  "'
 
         if (self.lang == 'ru'):
-            str_tweet += ' "text_ru" : "'+ self.sanitize_str(self.text) + '"'
+            str_tweet += ' "text_ru" : "'+ self.sanitize_str(self.text) + '  "'
 
         if (self.lang == 'fr'):
-            str_tweet += ' "text_fr" : "'+ self.sanitize_str(self.text) + '"'
+            str_tweet += ' "text_fr" : "'+ self.sanitize_str(self.text) + '  "'
 
         if (self.lang == 'sp'):
-            str_tweet += ' "text_sp" : "'+ self.sanitize_str(self.text) + '"'
+            str_tweet += ' "text_sp" : "'+ self.sanitize_str(self.text) + '  "'
 
 
         str_tweet += '}'
