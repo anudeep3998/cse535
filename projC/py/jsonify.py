@@ -18,4 +18,4 @@ for i in range(1,4):
                     line = line.replace("\n",",\n")
                     #print(line[len(line)-2])
                     out.write(line)
-            out.write("]");
+            out.write("{}]");
