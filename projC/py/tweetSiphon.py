@@ -72,9 +72,9 @@ init_by = 'user'
 current_topic = 1
 total_count = 0
 
-_INTERESTING_LIMIT_PER_TOPIC = 5
+_INTERESTING_LIMIT_PER_TOPIC = 30
 _TIME_LIMIT_PER_TOPIC_IN_MILLIS = 2000
-_TOTAL_TWEET_LIMIT = 2000
+_TOTAL_TWEET_LIMIT = 1000
 
 headers = {'Content-type':'application/json'}
 langs = ['de','ru','sp','ar','fr','ko','en']
@@ -105,7 +105,7 @@ class twitterListener(StreamListener) :
         count += 1
         total_count += 1
         print("Topic : "+ str(current_topic)+" count ::"+str(count)+" lang : "+tweet.lang)
-        if (count < _INTERESTING_LIMIT_PER_TOPIC) :
+        if (count <= _INTERESTING_LIMIT_PER_TOPIC) :
             with open(os.path.join(dirname,output_file_prefix + str(current_topic) + ".json"),"a+",encoding="utf-8") as out :
                 out.write(tweet.encode_to_json()+",\n")
         else :
@@ -148,6 +148,8 @@ if __name__ == '__main__':
                 #    p.terminate()
                 #    p.join()
                 twitterStream.filter(languages=langs,track=term_set[i])
+
+            print("completed : "+str(total_count))
 
         print("Finished")
     
