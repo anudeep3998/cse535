@@ -15,6 +15,7 @@ for i in range(1,4):
                 if (line[len(line)-2]) == ',':
                     out.write(line)
                 if (line[len(line)-2]) == '}':
-                    line[len(line)-1].replace("\n",",\n")
+                    line = line.replace("\n",",\n")
+                    #print(line[len(line)-2])
                     out.write(line)
             out.write("]");
