@@ -70,12 +70,14 @@ sanitize_str_set(term_set)
 count = 0
 init_by = 'user'
 current_topic = 1
+total_count = 0
 
-_INTERESTING_LIMIT_PER_TOPIC = 10
+_INTERESTING_LIMIT_PER_TOPIC = 5
 _TIME_LIMIT_PER_TOPIC_IN_MILLIS = 2000
+_TOTAL_TWEET_LIMIT = 2000
 
 headers = {'Content-type':'application/json'}
-langs = ['ru','de']
+langs = ['de','ru','sp','ar','fr','ko','en']
 
 
 class twitterListener(StreamListener) :
@@ -83,6 +85,7 @@ class twitterListener(StreamListener) :
     global count
     global tw_writer
     global init_by
+    global total_count
     
     def __init__(self):
         super().__init__()
@@ -95,11 +98,14 @@ class twitterListener(StreamListener) :
         global output_file_prefix
         global dirname
         global current_topic
+        global total_count
         
         tweet = customTweet(data)
 
         count += 1
-        if (count <= _INTERESTING_LIMIT_PER_TOPIC) :
+        total_count += 1
+        print("Topic : "+ str(current_topic)+" count ::"+str(count)+" lang : "+tweet.lang)
+        if (count < _INTERESTING_LIMIT_PER_TOPIC) :
             with open(os.path.join(dirname,output_file_prefix + str(current_topic) + ".json"),"a+",encoding="utf-8") as out :
                 out.write(tweet.encode_to_json()+"\n")
         else :
@@ -131,16 +137,17 @@ if __name__ == '__main__':
              msg = "user" + msg
              init_by = 'user'
         print(msg)
-        for i in range(topic_count):
-            current_topic = i + 1
-            print("retrieving tweets for topic : "+str(current_topic) + " terms :: " + str(term_set[i]))
-            #p = process.  (target=call_stream, name='call_stream', args=(twitterStream,langs,term_set[i]))
-            #p.start()
-            #time.sleep(2)
-            #if p.is_alive():
-            #    p.terminate()
-            #    p.join()
-            twitterStream.filter(languages=langs,track=term_set[i])
+        while total_count < _TOTAL_TWEET_LIMIT:
+            for i in range(topic_count):
+                current_topic = i + 1
+                print("retrieving tweets for topic : "+str(current_topic) + " terms :: " + str(term_set[i]))
+                #p = process.  (target=call_stream, name='call_stream', args=(twitterStream,langs,term_set[i]))
+                #p.start()
+                #time.sleep(2)
+                #if p.is_alive():
+                #    p.terminate()
+                #    p.join()
+                twitterStream.filter(languages=langs,track=term_set[i])
 
         print("Finished")
     
