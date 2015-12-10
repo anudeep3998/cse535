@@ -1,4 +1,4 @@
-just put your own keys (line 33 to 3^6) and put your querywords by translating in each language (from line 213 to 218)
+just put your own keys (line 33 to 36) and put your querywords by translating in each language (from line 213 to 218)
 and change the language in line 223 to get tweets for that language
 now there will only be one file generated after getting all tweets i.e. tweets.json
 we just have to enclose these tweets in square bracket after removing coma (,) at the end of the file  
