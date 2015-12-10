@@ -176,7 +176,7 @@ public class TwitterStreamCosumer {
                      //System.out.println(count);
                      //p.close();
                      p.append(",");
-                     if(count==10){
+                     if(count==500){
                     	 //p.append(jsonArray.toString());
                     	 p.close();
                     	 //System.out.println("CSV file was created successfully !!!");
