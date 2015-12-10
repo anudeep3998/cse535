@@ -149,7 +149,7 @@ public class TwitterStreamCosumer {
                      obj.put("created_at",ft.format(status.getCreatedAt()));
                      obj.put("tweet_hashtags",hashtag);
                      obj.put("expanded_urls",expand);
-                     obj.put("user_name" , status.getUser().getScreenName());
+                     obj.put("user_screen_name" , status.getUser().getScreenName());
                      obj.put("location",status.getUser().getLocation());
                      obj.put("retweet_status", status.isRetweet());
                      if (status.getQuotedStatus() == null)
