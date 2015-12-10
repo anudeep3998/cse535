@@ -217,7 +217,7 @@ public class TwitterStreamCosumer {
         String keywords_fr[]={};
         String keywords_es[]={};
         
-        String language="de";  //change the language here
+        String language="en";  //change the language here
         
         if(language.equals("en")){
         	fq.track(keywords_en);  
