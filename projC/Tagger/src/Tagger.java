@@ -196,6 +196,7 @@ public class Tagger {
 			System.out.println();
 			tag_cnt++;
 		}
+		//Collections.sort(node[], Collections.reverseOrder());
 	}
 }
 
